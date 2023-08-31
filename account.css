@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'Font1'; /* Header font */
+    src: url('media/font1/ancient-tulip-webfont.woff2') format('woff2'),
+    url('media/font1/ancient-tulip-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Font2'; /* menu bar font */
+    src: url('media/font2/VintageGlamour.woff2') format('woff2'),
+    url('media/font2/VintageGlamour.woff') format('woff');
+}
+
+header {
+    font-family: 'Font1', Arial, sans-serif;
+    background-image: url('media/home_banner.jpg');
+    height: 220px;
+    background-size: contain;
+    background-position: center;
+    color: #abdbb7;
+    text-align: center;
+    font-size: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header h1, .company-name {
+    font-size: 9vw;
+}
+h2 {
+    font-family: 'Font2', Arial, sans-serif;
+    font-size: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+    margin-bottom: 10%;
+}
+
+nav {
+    background-color: #5a768a;
+    color: #89d6b6;
+    text-align: center;
+    padding: 10px 0;
+}
+
+nav a {
+    color: #ffffff;
+    font-family: 'Font2', Arial, sans-serif;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #b8e0c7;
+
+}
+
+.info {
+    margin: 3% auto 10%;
+    width: 65%; /* Adjust width as needed */
+
+    height: fit-content;
+    border-radius: 0; /* Adjust border radius for sharp corners */
+    border: 2px solid black; /* Add a black border */
+
+    background-color: white;
+
+    text-align: left;
+    align-content: normal;
+
+    padding: 10px 10px 70px;
+
+}
+
+.info h1 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.info p{
+    padding-left: 130px;
+    font-family: 'Font2', Arial, sans-serif;
+    padding-bottom: 1%;
+}
+
+label {
+    position: revert;
+    transform: translateY(-50%);
+    background-color: #fff;
+    font-size: 16px;
+    transition: top 0.3s, font-size 0.6s;
+    color: #595959;
+    font-family: 'Font2', Arial, sans-serif;
+    text-align: left;
+}
+
+div{
+    width: 75%;
+    align-content: center;
+}
+
+.info a{
+    background-color: #5a768a; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: black;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-weight: bold;
+    margin-top: 10%;
+    margin-left: 130px;
+    font-size: 20px;
+    padding: 20px;
+    padding-inline: 70px;
+    text-decoration: none;
+}
+
+.logout-btn a{
+    background-color: #000000; /* Button background color */
+
+    color: #ffffff; /* Button text color */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-weight: bold;
+    margin-top: 10%;
+    height: fit-content;
+
+    width: fit-content;
+
+
+    font-size: 20px;
+    padding: 20px;
+    padding-inline: 70px;
+    text-decoration: none;
+    margin-bottom: 20%;
+}
+
+
+.info a:hover {
+    background-color: #89d6b6;
+}
+.logout-btn a:hover {
+    background-color: #cc0000;
+}

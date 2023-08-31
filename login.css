@@ -1,0 +1,188 @@
+@font-face {
+    font-family: 'Font1'; /* Header font */
+    src: url('media/font1/ancient-tulip-webfont.woff2') format('woff2'),
+    url('media/font1/ancient-tulip-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Font2'; /* menu bar font */
+    src: url('media/font2/VintageGlamour.woff2') format('woff2'),
+    url('media/font2/VintageGlamour.woff') format('woff');
+}
+
+header {
+    font-family: 'Font1', Arial, sans-serif;
+    background-image: url('media/home_banner.jpg'); /* Replace with the actual path to your image */
+    height: 220px;
+    background-size: contain;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.6); /* Optional overlay color */
+    color: #abdbb7;
+    text-align: center;
+    font-size: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header h1, .company-name {
+    /*padding-top: -960px; /* Add padding to the top to separate from the banner */
+    font-size: 9vw; /* Adjust font size as needed */
+}
+h2 {
+    font-family: 'Font2', Arial, sans-serif;
+    font-size: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+    margin-bottom: 20%;
+}
+
+
+.company-name {
+    /* font-size: 24px;*/
+    font-weight: bold;
+
+}
+nav {
+    background-color: #5a768a;
+    color: #89d6b6;
+    text-align: center;
+    padding: 10px 0;
+
+}
+nav a {
+    color: #ffffff;
+    font-family: 'Font2', Arial, sans-serif;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #b8e0c7;
+
+}
+
+.login-container {
+    margin: 0 auto;
+    margin-top: 3%;
+    width: 35%; /* Adjust width as needed */
+
+    border-radius: 0px; /* Adjust border radius for sharp corners */
+    border: 2px solid black; /* Add a black border */
+
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    align-content: center;
+}
+
+.login-container h1 {
+    margin-bottom: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container input {
+    display: flex;
+
+    width: 100%;
+    padding: 10px;
+    border: none; /* Remove the default border */
+    border-bottom: 1px solid #ccc; /* Add a bottom border */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    background-color: white;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.input-group {
+    width: 70%;
+
+    padding-inline: 15%;
+    position: relative;
+    margin-bottom: 20px;
+    margin-outside: 50px;
+
+
+}
+
+.login-container form {
+    margin-top: 20px; /* Add spacing at the top */
+    margin-bottom: 40px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: transparent;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+label {
+
+    position: revert;
+    transform: translateY(-50%);
+    background-color: #fff;
+    font-size: 16px;
+    transition: top 0.3s, font-size 0.6s;
+    color: #595959;
+    font-family: 'Font2', Arial, sans-serif;
+    text-align: left;
+
+}
+
+input:focus,
+input:valid {
+    background-color: #fff;
+}
+
+input:focus + label,
+input:valid + label {
+    top: 0;
+    font-size: 10px;
+    background-color: transparent;
+}
+
+div{
+    width: 40%;
+    align-content: center;
+}
+
+.login-container button {
+    background-color: #5a768a; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: black;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-weight: bold;
+    padding: 15px 70px;
+    margin-top: 30px;
+    font-size: 20px;
+
+}
+
+.login-container button:hover {
+    background-color: #89d6b6;
+}
+
+a{
+    color: #5a768a;
+    font-family: 'Font2', Arial, sans-serif;
+    margin: 0 15px;
+    font-weight: bold;
+}
