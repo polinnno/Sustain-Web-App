@@ -76,13 +76,15 @@ session_start();
 
     <a href="project-history.php" class="btn">Project History</a>
     <p></p>
-    <p></p>
+    <div class="add-project-btn">
+        <!-- TODO: link to add an event -->
+        <a href="add-project.php" class="add-project-btn">Add Project</a>
+    </div>
     <div class="logout-btn">
         <a href="logout.php" class="btn">Log Out</a>
     </div>
 
-    <!-- TODO: link to add an event -->
-    <a href="add-project.php">Add Project</a>
+
 
 </div>
 </body>

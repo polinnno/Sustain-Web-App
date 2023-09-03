@@ -15,25 +15,26 @@ body {
     margin: 0;
     padding: 0;
 }
+
 header {
     font-family: 'Font1', Arial, sans-serif;
-    background-image: url('media/home_banner.jpg'); /* Replace with the actual path to your image */
+    background-image: url('media/home_banner.jpg');
     height: 220px;
     background-size: contain;
     background-position: center;
-    background-color: rgba(0, 0, 0, 0.6); /* Optional overlay color */
+    background-color: rgba(0, 0, 0, 0.6);
     color: #abdbb7;
-    /*padding: 10px 0; */
     text-align: center;
     font-size: 5vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 header h1, .company-name {
-    /*padding-top: -960px; /* Add padding to the top to separate from the banner */
     font-size: 9vw; /* Adjust font size as needed */
 }
+
 h2 {
     font-family: 'Font2', Arial, sans-serif;
     font-size: 3vw;
@@ -41,26 +42,143 @@ h2 {
     justify-content: center;
     align-items: center;
     font-weight: lighter;
-
 }
 
-
-.company-name {
-    /* font-size: 24px;*/
-    font-weight: bold;
-
-}
 nav {
     background-color: #5a768a;
     color: #89d6b6;
     text-align: center;
     padding: 10px 0;
-
 }
+
+
 nav a {
     color: #ffffff;
     font-family: 'Font2', Arial, sans-serif;
     text-decoration: none;
     margin: 0 15px;
     font-weight: bold;
+    display: inline;
+}
+
+.gallery-container {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Center the gallery */
+    height: 1000px;
+}
+
+.gallery-slides {
+    display: flex;
+    animation: scroll 60s linear infinite; /* Apply the scrolling animation */
+    height: 1000px;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0); /* Start from the left */
+    }
+    to {
+        transform: translateX(-200%); /* Scroll to the left */
+    }
+}
+
+.gallery-slide {
+    position: relative;
+    width: auto; /* Ensure each slide takes up full width */
+    height: 400px;
+}
+
+.gallery-slide img {
+    width: auto; /* Let the image adjust its width naturally */
+    height: 100%; /* Ensure images take up full height of slide */
+}
+
+.gallery-slide img.main-slide {
+    filter: none;
+}
+.home-greeting{
+    text-align: center;
+    font-family: Perpetua, Font2, sans-serif;
+    font-size: 1.3vw;
+    line-height: 1.5;
+}
+
+.home-greeting-container{
+    background-image: url("media/bg/green-3.jpg");
+}
+
+.home-greeting{
+    width: 50%;
+    margin: 10%;
+    margin-inline: 25%;
+}
+
+.about-us{
+    text-align: center;
+    font-family: Perpetua, Font2, sans-serif;
+    font-size: 1.3vw;
+    line-height: 1.5;
+}
+
+.about-us-container{
+    width: 70%;
+    margin-bottom: 4%;
+    margin-inline: 15%;
+}
+
+.menu-btn{
+    align-self: start;
+    max-height: 20px;
+    margin-right: 30%;
+    margin-left: 0;
+    display: inline;
+}
+
+.menu-content{
+    display: inline;
+}
+
+.menu-button{
+    display: inline;
+    margin-right: 30%;
+}
+
+#menu-icon {
+    cursor: pointer;
+}
+
+.vertical-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #5a768a;
+    font-family: Font2, sans-serif;
+    min-width: 20%;
+    z-index: 1;
+    margin-right: 80%;
+    text-align: center;
+    border-bottom-right-radius: 2vw;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.vertical-menu a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: white;
+    text-align-all: center;
+    font-weight: bold;
+    margin: 3%;
+}
+
+.menu-button:hover .vertical-menu {
+    max-height: 200px; /* Adjust the maximum height as needed */
+    transition: max-height 0.9s ease-in-out; /* Add this line */
+}
+
+
+.vertical-menu.open {
+    max-height: 200px; /* Adjust the maximum height as needed */
 }

@@ -81,7 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo '<a href="login.php">Log in</a>';
     }
-    ?></nav>
+    ?>
+
+</nav>
 
 <div class="login-container">
     <h2>Login</h2>

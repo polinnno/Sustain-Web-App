@@ -14,20 +14,152 @@
     <h1>Sustain</h1>
 </header>
 <nav>
-    <a href="home.php">Home</a>
-    <a href="projects.php">Projects</a>
-    <a href="contact.html">Contact Form</a>
-    <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    if (isset($_SESSION['user_id'])) {
-        echo '<a href="account.php">Account</a>';
-    } else {
-    echo '<a href="login.php">Log in</a>';
-    }
-    ?>
+    <div class="menu-button">
+        <img src="media/menu-ico.jpg" alt="Menu" id="menu-icon" class="menu-btn">
+        <div class="menu-content" id="menu-content">
+            <!-- Add your menu options here -->
+
+
+            <a href="home.php">Home</a>
+            <a href="projects.php">Projects</a>
+            <a href="contact.html">Contact Form</a>
+            <?php
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (isset($_SESSION['user_id'])) {
+                echo '<a href="account.php" class="last-btn">Account</a>';
+            } else {
+                echo '<a href="login.php" class="last-btn">Log in</a>';
+            }
+            ?>
+        </div>
+    </div>
+
 </nav>
-<!-- Add content for the home page here -->
+<div class="vertical-menu" id="vertical-menu">
+    <!-- Add your vertical menu options here -->
+    <a href="add-project.php">Add Project</a>
+    <a href="project-history.php">Project History</a>
+    <a href="logout.php">Log Out</a>
+</div>
+<div class="home-greeting-container">
+    <p class="home-greeting">
+        Whether you're eager to lend a helping hand or seeking driven
+        individuals to turn your altruistic dreams into reality, this
+        is where aspirations take flight. Join us in forging connections,
+        sharing dreams, and turning compassion into impactful action.
+        <br>Together, we have the power to inspire, uplift, and make
+        a difference. Welcome to a place where kindness finds its purpose and the
+        world transforms, one act of volunteering at a time.
+    </p>
+</div>
+
+<div class="about-us">
+    <h2>About Us</h2>
+    <div class="about-us-container">
+        <p>Welcome to Sustain! We're here to connect individuals who are passionate
+            about making a difference with organizations that are driving positive change. Whether you're an eager
+            volunteer looking to contribute your time and skills, or an organizer seeking dedicated individuals to
+            help bring your projects to life, our platform is your go-to destination.
+            <br>
+            Our team understands the power of collective action. We're volunteers and organizers ourselves,
+            driven by the belief that every small effort can create a ripple of impact. Our platform simplifies
+            the process, making it easy for you to find opportunities that resonate with your values or recruit
+            enthusiastic volunteers for your initiatives.
+            <br>
+            With a user-friendly interface and intuitive features, you can browse through various projects,
+            filter based on your interests and availability, and seamlessly get involved. We're all about
+            efficiency and effectiveness, ensuring that your journey from signing up to making a difference
+            is as smooth as possible.
+            <br>
+            Join us in building a global community that stands for positive change. Together, we amplify
+            our impact and inspire others to take part. Thank you for being a part of our mission to
+            create a better world through the power of volunteering."
+        </p>
+    </div>
+
+</div>
+<section class="gallery-container">
+    <div class="gallery-slides">
+        <div class="gallery-slide" id="slide-1">
+            <img src="media/home-gallery/01.jpg" alt="Slide 1" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-2">
+            <img src="media/home-gallery/02.jpg" alt="Slide 2" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-3">
+            <img src="media/home-gallery/03.jpg" alt="Slide 3" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-4">
+            <img src="media/home-gallery/04.jpg" alt="Slide 4" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-5">
+            <img src="media/home-gallery/05.jpg" alt="Slide 5" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-6">
+            <img src="media/home-gallery/06.jpg" alt="Slide 6" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-7">
+            <img src="media/home-gallery/07.jpg" alt="Slide 7" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-8">
+            <img src="media/home-gallery/08.jpg" alt="Slide 8" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-9">
+            <img src="media/home-gallery/09.jpg" alt="Slide 9" class="gallery-image main-slide">
+        </div>
+        <div class="gallery-slide" id="slide-10">
+            <img src="media/home-gallery/10.jpg" alt="Slide 10" class="gallery-image main-slide">
+        </div>
+
+
+    </div>
+</section>
+
+
+<script>
+    const slidesContainer = document.querySelector('.gallery-slides');
+    const slides = document.querySelectorAll('.gallery-slide');
+    const slideWidth = slides[0].offsetWidth; // Assuming all slides have the same width
+
+    function startContinuousScrolling() {
+        let currentPosition = 0;
+
+        function moveSlides() {
+            currentPosition -= 1; // Move by 1 pixel at a time
+            slidesContainer.style.transform = `translateX(${currentPosition}px)`;
+
+            // Reset position to the right when it reaches the end
+            if (currentPosition <= -slideWidth) {
+                currentPosition = slideWidth;
+            }
+
+            requestAnimationFrame(moveSlides); // Continue animation
+        }
+        // Start the continuous scrolling animation
+        moveSlides();
+    }
+
+    startContinuousScrolling();
+    var verticalMenu = document.getElementById("vertical-menu");
+
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        verticalMenu.classList.toggle("open");
+    });
+
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        var verticalMenu = document.getElementById("vertical-menu");
+        if (verticalMenu.style.display === "block") {
+            verticalMenu.style.display = "none";
+        } else {
+            verticalMenu.style.display = "block";
+        }
+    });
+
+
+</script>
+
+
 </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-var_dump($_SESSION);
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -7,8 +6,6 @@ error_log($_SESSION['user_id']);
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Your existing PHP code here
-
     error_log('first if');
 
     error_log('we good?');
@@ -66,13 +63,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     error_log('unique id set');
 
     $uploadDir = 'user-media' . DIRECTORY_SEPARATOR;
+    if (substr($uploadDir, -1) !== DIRECTORY_SEPARATOR) {
+        $uploadDir .= DIRECTORY_SEPARATOR;
+    }
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $tempFilePath = $_FILES['image']['tmp_name'];
         $fileName = $_FILES['image']['name'];
 
         // Move the uploaded file to the specified directory
-        $targetFilePath = $uploadDir . $fileName;
+        $targetFilePath = 'project-media' . DIRECTORY_SEPARATOR . $fileName;
+        ///error_log($targetFilePath);
 
         if (move_uploaded_file($tempFilePath, $targetFilePath)) {
             // File was successfully uploaded, you can save $targetFilePath in the database
@@ -81,8 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     } elseif (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
         // Use the default image when no file was uploaded
-        $targetFilePath = 'media' . DIRECTORY_SEPARATOR . 'user-pp.jpg';
+        $targetFilePath = 'media' . DIRECTORY_SEPARATOR . 'project-default.jpg';
     }
+
+
 
 // Retrieve form data
     $title = $_POST['title'];
@@ -97,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 // Insert data into the database
     $sql = "INSERT INTO project (id,title, description, start_date, end_date, place, organizer_id, image)
-        VALUES ('$newProjectID', '$title', '$description', '$start_date', '$end_date', '$place', '$organizer_id', '$targetFilePath')";
+        VALUES ('$newProjectID', '$title', '$description', '$start_date', '$end_date', '$place', '$organizer_id', '$fileName')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Project added successfully!";
@@ -146,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="add-project-container">
 
     <h2>New Project</h2>
-    <form action="process_add_project.php" method="POST" enctype="multipart/form-data">
+    <form action="add-project.php" method="POST" enctype="multipart/form-data">
         <div class="input-group">
             <label for="title">Title:</label>
             <p></p>

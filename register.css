@@ -166,7 +166,7 @@ input:valid + label {
     padding: 15px 70px;
     margin-top: 30px;
     font-size: 20px;
-
+    border-radius: 3vw;
 }
 
 .register-container button:hover {
@@ -193,6 +193,8 @@ select {
     background-position: right center;
     background-size: 20px 20px; /* Adjust the size of the arrow icon */
     padding-right: 40px; /* Add space for the arrow icon */
+    border-radius: 3vw;
+
 }
 
 /* Apply styles to the "Choose File" input element */
@@ -207,6 +209,8 @@ input[type="file"] {
     font-family: 'Font2', Arial, sans-serif;
     text-decoration-color: #5a768a;
     margin-bottom: 20px;
+    border-radius: 3vw;
+
 }
 
 /* Style the "Choose File" button */
@@ -224,9 +228,9 @@ input[type="file"]::-webkit-file-upload-button {
     background-color: #5a768a;
     color: #fff;
     border: none;
-    border-radius: 5px;
     padding: 10px;
     cursor: pointer;
+    border-radius: 3vw;
 }
 
 .notification {

@@ -118,6 +118,8 @@ body {
     align-content: center;
     width: 24%;
     margin-inline: 38%;
+    border-radius: 3vw;
+
 
 }
 
@@ -136,7 +138,8 @@ input[type="file"] {
     font-family: 'Font2', Arial, sans-serif;
     text-decoration-color: #5a768a;
     margin-bottom: 20px;
-    border-radius: 24px;
+    border-radius: 3vw;
+
 }
 
 /* Style the "Choose File" button */
@@ -147,6 +150,7 @@ input[type="file"]::file-selector-button {
     border: none;
     cursor: pointer;
     font-family: 'Font2', Arial, sans-serif;
+    border-radius: 3vw;
 }
 
 /* Style the arrow icon (if applicable) */
@@ -154,9 +158,9 @@ input[type="file"]::-webkit-file-upload-button {
     background-color: #5a768a;
     color: #fff;
     border: none;
-    border-radius: 25px;
     padding: 10px;
     cursor: pointer;
+    border-radius: 3vw;
 }
 
 .input-group label {
@@ -166,4 +170,10 @@ input[type="file"]::-webkit-file-upload-button {
 
 textarea{
     width: 70%;
+}
+
+.textarea{
+    font-family: Perpetua, Font2, sans-serif;
+    border-radius: 0.5vw;
+    font-size: 120%;
 }

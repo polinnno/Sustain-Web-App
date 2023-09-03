@@ -123,6 +123,7 @@ div{
     padding: 20px;
     padding-inline: 70px;
     text-decoration: none;
+    border-radius: 3vw;
 }
 
 .logout-btn a{
@@ -133,17 +134,19 @@ div{
     transition: background-color 0.3s;
     font-family: 'Font2', Arial, sans-serif; /* Button font */
     font-weight: bold;
-    margin-top: 10%;
     height: fit-content;
 
     width: fit-content;
 
+    border-radius: 3vw;
+    display: inline-block;
 
     font-size: 20px;
     padding: 20px;
     padding-inline: 70px;
     text-decoration: none;
     margin-bottom: 20%;
+    margin-top: 10%;
 }
 
 

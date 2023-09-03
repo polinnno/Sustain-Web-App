@@ -57,4 +57,7 @@
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 3vw;
+
+    font-family: Font2, sans-serif;
 }
