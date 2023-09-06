@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'Font1'; /* Header font */
+    src: url('media/font1/ancient-tulip-webfont.woff2') format('woff2'),
+    url('media/font1/ancient-tulip-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Font2'; /* menu bar font */
+    src: url('media/font2/VintageGlamour.woff2') format('woff2'),
+    url('media/font2/VintageGlamour.woff') format('woff');
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* CSS for the rotating gallery */
+.projects-rotating-gallery {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.gallery-slides {
+    display: flex;
+    transition: transform 1s ease-in-out;
+}
+
+.project-2 {
+    flex: 0 0 20%; /* Show five projects at a time */
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.project-2 h3 {
+    margin: 10px 0;
+    font-family: 'Font2', Arial, sans-serif;
+}
+
+.project-2 img {
+    width: 15vw;
+    height: 15vw;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 10px auto;
+}
+
+.project-2 p {
+    font-family: Perpetua, 'Font2', sans-serif;
+    font-size: large;
+    padding-bottom: 10%;
+}
+
+.rotate-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: #000;
+    cursor: pointer;
+}
+
+#prev-button {
+    left: 0;
+    color: rgb(255,255,255, 0.5);
+    height: 300px;
+    width: auto;
+}
+
+#next-button {
+    right: 0;
+}
+

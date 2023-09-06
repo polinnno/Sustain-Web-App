@@ -1,3 +1,19 @@
+<?php
+$conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch project data from the database
+$sql = "SELECT * FROM project";
+$result = $conn->query($sql);
+
+// Close the database connection
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +59,61 @@
     <a href="project-history.php">Project History</a>
     <a href="logout.php">Log Out</a>
 </div>
+
+
+<div class="projects-rotating-gallery">
+    <div class="gallery-slides-2">
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="project-2">
+                <img src="project-media/<?php echo $row["image"]; ?>" alt="Project Image">
+                <h3><?php echo $row["title"]; ?></h3>
+            </div>
+        <?php endwhile; ?>
+    </div>
+    <button class="rotate-button" id="prev-button">&#9664;</button>
+    <button class="rotate-button" id="next-button">&#9654;</button>
+</div>
+
+<div class="separator">
+</div>
+
+<div class="abt">
+    <div class="abt-image-1">
+        <img src="media/home-gallery/04.jpg" alt="Image">
+    </div>
+    <div class="abt-text-1">
+        <p>
+            Welcome to Sustain! We're here to connect individuals who are passionate
+            about making a difference with organizations that are driving positive change. Whether you're an eager
+            volunteer looking to contribute your time and skills, or an organizer seeking dedicated individuals to
+            help bring your projects to life, our platform is your go-to destination.
+            <br>
+            Our team understands the power of collective action. We're volunteers and organizers ourselves,
+            driven by the belief that every small effort can create a ripple of impact. Our platform simplifies
+            the process, making it easy for you to find opportunities that resonate with your values or recruit
+            enthusiastic volunteers for your initiatives.
+        </p>
+    </div>
+</div>
+<div class="abt">
+    <div class="abt-text-2">
+        <p>
+            With a user-friendly interface and intuitive features, you can browse through various projects,
+            filter based on your interests and availability, and seamlessly get involved. We're all about
+            efficiency and effectiveness, ensuring that your journey from signing up to making a difference
+            is as smooth as possible.
+            <br>
+            Join us in building a global community that stands for positive change. Together, we amplify
+            our impact and inspire others to take part. Thank you for being a part of our mission to
+            create a better world through the power of volunteering."
+        </p>
+    </div>
+    <div class="abt-image-2">
+        <img src="media/home-gallery/14.jpg" alt="Image">
+    </div>
+</div>
+
+
 <div class="home-greeting-container">
     <p class="home-greeting">
         Whether you're eager to lend a helping hand or seeking driven
@@ -119,6 +190,9 @@
 
 
 <script>
+    /*
+    Moving Gallery
+     */
     const slidesContainer = document.querySelector('.gallery-slides');
     const slides = document.querySelectorAll('.gallery-slide');
     const slideWidth = slides[0].offsetWidth; // Assuming all slides have the same width
@@ -142,6 +216,10 @@
     }
 
     startContinuousScrolling();
+
+    /*
+    Vertical Menu
+     */
     var verticalMenu = document.getElementById("vertical-menu");
 
     document.getElementById("menu-icon").addEventListener("click", function () {
@@ -158,8 +236,41 @@
     });
 
 
+    /*
+    Rotating Project Gallery:
+     */
+    const slidesContainer_2 = document.querySelector('.gallery-slides-2');
+    const projects = document.querySelectorAll('.project-2');
+    const slideWidth_2 = projects[0].offsetWidth; // Width of one project
+    const totalSlides = projects.length;
+    const visibleSlides = 7; // Number of slides to display at a time
+    let currentIndex = 0;
+
+    function startRotatingGallery() {
+        function rotateGallery() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            const translateX = -currentIndex * slideWidth_2;
+            slidesContainer_2.style.transform = `translateX(${translateX}px)`;
+        }
+
+        const rotateInterval = setInterval(rotateGallery, 3500);
+
+        // Add event listeners for previous and next buttons
+        document.getElementById('prev-button').addEventListener('click', () => {
+            clearInterval(rotateInterval);
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            const translateX = -currentIndex * slideWidth_2;
+            slidesContainer_2.style.transform = `translateX(${translateX}px)`;
+        });
+
+        document.getElementById('next-button').addEventListener('click', () => {
+            clearInterval(rotateInterval);
+            currentIndex = (currentIndex + 1) % totalSlides;
+            const translateX = -currentIndex * slideWidth_2;
+            slidesContainer_2.style.transform = `translateX(${translateX}px)`;
+        });
+    }
+    startRotatingGallery();
 </script>
-
-
 </body>
 </html>

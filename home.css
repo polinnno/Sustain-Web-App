@@ -49,6 +49,7 @@ nav {
     color: #89d6b6;
     text-align: center;
     padding: 10px 0;
+    margin: 0;
 }
 
 
@@ -56,7 +57,7 @@ nav a {
     color: #ffffff;
     font-family: 'Font2', Arial, sans-serif;
     text-decoration: none;
-    margin: 0 15px;
+    margin: 0 19px;
     font-weight: bold;
     display: inline;
 }
@@ -102,16 +103,23 @@ nav a {
     font-family: Perpetua, Font2, sans-serif;
     font-size: 1.3vw;
     line-height: 1.5;
+    margin-inline: 15%;
+    width: 50%;
+    background: white;
+    border: black solid 3px;
+    padding-inline: 10%;
+    padding-top: 7%;
+    padding-bottom: 7%;
+
 }
 
 .home-greeting-container{
-    background-image: url("media/bg/green-3.jpg");
-}
-
-.home-greeting{
-    width: 50%;
-    margin: 10%;
-    margin-inline: 25%;
+    background-image: url("media/bg/green-6-1.jpg");
+    padding-top: 10%;
+    padding-bottom: 10%;
+    margin: 0;
+    background-size: cover; /* This will scale the image to cover the entire container */
+    border: black 7px;
 }
 
 .about-us{
@@ -119,11 +127,12 @@ nav a {
     font-family: Perpetua, Font2, sans-serif;
     font-size: 1.3vw;
     line-height: 1.5;
+    padding-top: 5%;
 }
 
 .about-us-container{
     width: 70%;
-    margin-bottom: 4%;
+    margin-bottom: 5%;
     margin-inline: 15%;
 }
 
@@ -159,6 +168,7 @@ nav a {
     margin-right: 80%;
     text-align: center;
     border-bottom-right-radius: 2vw;
+    border-bottom-left-radius: 2vw;
     max-height: 0;
     overflow: hidden;
 }
@@ -181,4 +191,128 @@ nav a {
 
 .vertical-menu.open {
     max-height: 200px; /* Adjust the maximum height as needed */
+}
+
+
+.abt{
+    display: flex; /* Use flexbox to control the layout */
+    align-items: center; /* Vertically center the content */
+    background-color: #9bc1c4;
+}
+
+.abt-text-1{
+    width: 50%; /* Adjust the width as needed */
+    font-family: Perpetua, Font2, sans-serif;
+    font-size: 1.3vw;
+    line-height: 1.5;
+    text-align: center;
+    margin-inline: 3% 8%;
+}
+
+.abt-image-1{
+    width: 50%; /* Adjust the width as needed */
+    left: 0;
+}
+
+.abt-image-1 img {
+    width: 100%; /* Make the image fill its container */
+    height: auto; /* Maintain the aspect ratio */
+    margin-top: 10%;
+}
+
+.abt-text-2{
+    width: 55%; /* Adjust the width as needed */
+    padding: 20px 20px 20px 0; /* Add padding for spacing */
+    font-family: Perpetua, Font2, sans-serif;
+    font-size: 1.3vw;
+    line-height: 1.5;
+    text-align: center;
+    margin-inline: 8% 3%;
+}
+
+.abt-image-2{
+    width: 70%; /* Adjust the width as needed */
+    align-content: end;
+}
+
+.abt-image-2 img {
+    width: 100%; /* Make the image fill its container */
+    height: auto; /* Maintain the aspect ratio */
+    right: 0;
+}
+
+
+
+
+
+/* CSS for the rotating gallery */
+.projects-rotating-gallery {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: #95bdb0;
+
+}
+
+.gallery-slides-2 {
+    display: flex;
+    transition: transform 1s ease-in-out;
+}
+
+.project-2 {
+    flex: 0 0 14%; /* Show seven projects at a time */
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.project-2 h3 {
+    margin: 10px 0;
+    font-family: 'Font2', Arial, sans-serif;
+}
+
+.project-2 img {
+    width: 11vw;
+    height: 11vw;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 10px auto 3px;
+}
+
+.project-2 p {
+    font-family: Perpetua, 'Font2', sans-serif;
+    font-size: large;
+    padding-bottom: 2%;
+}
+
+.rotate-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: #000;
+    cursor: pointer;
+}
+
+#prev-button {
+    left: 0;
+    color: rgb(255,255,255, 0.5);
+}
+
+#next-button {
+    right: 0;
+}
+
+.separator{
+    background-image:
+            linear-gradient(to right, transparent 100px, transparent 300px), /* Add 10px of space before repeating the image */
+            url("media/bg/leaf.png"); /* Your image */
+    width: 100%;
+    height: 33px;
+    background-size: 1.5%;
+    background-repeat: repeat-x;
+    background-color: rgba(1, 57, 174, 0.41);
 }
