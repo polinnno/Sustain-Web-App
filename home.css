@@ -188,60 +188,9 @@ nav a {
     transition: max-height 0.9s ease-in-out; /* Add this line */
 }
 
-
 .vertical-menu.open {
     max-height: 200px; /* Adjust the maximum height as needed */
 }
-
-
-.abt{
-    display: flex; /* Use flexbox to control the layout */
-    align-items: center; /* Vertically center the content */
-    background-color: #9bc1c4;
-}
-
-.abt-text-1{
-    width: 50%; /* Adjust the width as needed */
-    font-family: Perpetua, Font2, sans-serif;
-    font-size: 1.3vw;
-    line-height: 1.5;
-    text-align: center;
-    margin-inline: 3% 8%;
-}
-
-.abt-image-1{
-    width: 50%; /* Adjust the width as needed */
-    left: 0;
-}
-
-.abt-image-1 img {
-    width: 100%; /* Make the image fill its container */
-    height: auto; /* Maintain the aspect ratio */
-    margin-top: 10%;
-}
-
-.abt-text-2{
-    width: 55%; /* Adjust the width as needed */
-    padding: 20px 20px 20px 0; /* Add padding for spacing */
-    font-family: Perpetua, Font2, sans-serif;
-    font-size: 1.3vw;
-    line-height: 1.5;
-    text-align: center;
-    margin-inline: 8% 3%;
-}
-
-.abt-image-2{
-    width: 70%; /* Adjust the width as needed */
-    align-content: end;
-}
-
-.abt-image-2 img {
-    width: 100%; /* Make the image fill its container */
-    height: auto; /* Maintain the aspect ratio */
-    right: 0;
-}
-
-
 
 
 
@@ -250,7 +199,7 @@ nav a {
     position: relative;
     width: 100%;
     overflow: hidden;
-    background-color: #95bdb0;
+    background-color: #a9bbc4;
 
 }
 

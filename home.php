@@ -74,46 +74,6 @@ $conn->close();
     <button class="rotate-button" id="next-button">&#9654;</button>
 </div>
 
-<div class="separator">
-</div>
-
-<div class="abt">
-    <div class="abt-image-1">
-        <img src="media/home-gallery/04.jpg" alt="Image">
-    </div>
-    <div class="abt-text-1">
-        <p>
-            Welcome to Sustain! We're here to connect individuals who are passionate
-            about making a difference with organizations that are driving positive change. Whether you're an eager
-            volunteer looking to contribute your time and skills, or an organizer seeking dedicated individuals to
-            help bring your projects to life, our platform is your go-to destination.
-            <br>
-            Our team understands the power of collective action. We're volunteers and organizers ourselves,
-            driven by the belief that every small effort can create a ripple of impact. Our platform simplifies
-            the process, making it easy for you to find opportunities that resonate with your values or recruit
-            enthusiastic volunteers for your initiatives.
-        </p>
-    </div>
-</div>
-<div class="abt">
-    <div class="abt-text-2">
-        <p>
-            With a user-friendly interface and intuitive features, you can browse through various projects,
-            filter based on your interests and availability, and seamlessly get involved. We're all about
-            efficiency and effectiveness, ensuring that your journey from signing up to making a difference
-            is as smooth as possible.
-            <br>
-            Join us in building a global community that stands for positive change. Together, we amplify
-            our impact and inspire others to take part. Thank you for being a part of our mission to
-            create a better world through the power of volunteering."
-        </p>
-    </div>
-    <div class="abt-image-2">
-        <img src="media/home-gallery/14.jpg" alt="Image">
-    </div>
-</div>
-
-
 <div class="home-greeting-container">
     <p class="home-greeting">
         Whether you're eager to lend a helping hand or seeking driven
@@ -187,8 +147,6 @@ $conn->close();
 
     </div>
 </section>
-
-
 <script>
     /*
     Moving Gallery

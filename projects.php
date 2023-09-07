@@ -10,6 +10,21 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM project";
 $result = $conn->query($sql);
 
+// Settings for "Join" Button
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $role_query = "SELECT role FROM users WHERE id = $user_id";
+    $role_result = $conn->query($role_query);
+
+    if ($role_result->num_rows > 0) {
+        $row = $role_result->fetch_assoc();
+        $userRole = $row['role'];
+    }
+} else {
+    $userRole = "volunteer"; // Default to volunteer if not logged in
+}
+
+
 // Close the database connection
 $conn->close();
 ?>
@@ -53,15 +68,27 @@ $conn->close();
             <img src="project-media/<?php echo $row["image"]; ?>" alt="Project Image">
             <h3><?php echo $row["title"]; ?></h3>
             <p><?php echo $row["description"]; ?></p>
-            <!-- Display other project attributes here -->
+
+            <!-- Display the "Join" button based on user role -->
+            <?php if ($userRole === "volunteer" || !isset($_SESSION['user_id'])): ?>
+                <form action="project-details.php" method="GET" class="join-form">
+                    <input type="hidden" name="project_id" value="<?php echo $row['id']; ?>">
+                    <input type="hidden" name="user_role" value="<?php echo $userRole; ?>">
+
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                    <?php
+                    error_log("bla");
+                    endif; ?>
+                    <button type="submit" class="join-button">Join</button>
+                </form>
+            <?php endif; ?>
 
         </div>
     <?php endwhile; ?>
 </div>
-<p>
-
-</p>
-<p>  </p>
+<p></p>
+<p></p>
 <p></p>
 </body>
 </html>
