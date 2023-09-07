@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +76,6 @@ session_start();
     <a href="project-history.php" class="btn">Project History</a>
     <p></p>
     <div class="add-project-btn">
-        <!-- TODO: link to add an event -->
         <a href="add-project.php" class="add-project-btn">Add Project</a>
     </div>
     <div class="logout-btn">

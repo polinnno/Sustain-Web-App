@@ -73,7 +73,6 @@ $conn->close();
             <?php if ($userRole === "volunteer" || !isset($_SESSION['user_id'])): ?>
                 <form action="project-details.php" method="GET" class="join-form">
                     <input type="hidden" name="project_id" value="<?php echo $row['id']; ?>">
-                    <input type="hidden" name="user_role" value="<?php echo $userRole; ?>">
 
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">

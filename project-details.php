@@ -1,26 +1,48 @@
 <?php
-$conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
+// Fetch data from the previous page
+if (isset($_GET['project_id'])) {
+    $projectId = $_GET['project_id'];
+    error_log("Project ID: " . $projectId);
 
-// Check connection
+}
+if (isset($_GET['user_id'])) {
+    $userId = $_GET['user_id'];
+    error_log("getting user id...");
+    error_log("User ID: " . $userId);
+
+}
+
+// Get all the DB entries to be displayed
+$conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch project data from the database
-$sql = "SELECT * FROM project";
-$result = $conn->query($sql);
 
-// Fetch data from the previous page
-if (isset($_GET['user_role']) && isset($_GET['project_id'])) {
-    $userRole = $_GET['user_role'];
-    $projectId = $_GET['project_id'];
+// Fetch project and organizer information from the database based on the project_id
+$query = "SELECT p.id, p.title, p.description, p.start_date, p.end_date, p.place, p.organizer_id, p.image, u.role
+        FROM project p
+        JOIN users u ON p.organizer_id = u.id
+        WHERE p.id = ? LIMIT 1";
+
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $projectId);
+$stmt->execute();
+$stmt->bind_result($projectId, $title, $description, $startDate, $endDate, $place, $organizerId, $image, $userRole);
+
+if ($stmt->fetch()) {
+    // Values fetched successfully
+} else {
+    die("No results found.");
 }
-if (isset($_GET['user_id'])) {
-    $userId = $_GET['user_id'];
-}
+
+$stmt->fetch();
+error_log($title);
+$stmt->close();
 
 // Close the database connection
 $conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +51,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustain - Home</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="project-details.css">
     <!-- Favicon -->
     <link rel="icon" href="media/circle.ico" type="image/x-icon">
     <link rel="shortcut icon" href="media/circle.ico" type="image/x-icon">
@@ -43,7 +65,6 @@ $conn->close();
         <img src="media/menu-ico.jpg" alt="Menu" id="menu-icon" class="menu-btn">
         <div class="menu-content" id="menu-content">
             <!-- Add your menu options here -->
-
 
             <a href="home.php">Home</a>
             <a href="projects.php">Projects</a>
@@ -69,34 +90,28 @@ $conn->close();
     <a href="logout.php">Log Out</a>
 </div>
 
+<div class="info">
+    <h2><?php echo $title ?></h2>
+    <p><?php echo $description; ?></p>
+    <p>Start Date: <?php echo $startDate; ?></p>
+    <p>End Date: <?php echo $endDate; ?></p>
+    <p>Location: <?php echo $place; ?></p>
+    <p>Organizer ID: <?php echo $organizerId; ?></p>
+    <p>User Role: <?php echo $userRole; ?></p>
+
+
+</div>
+
+
+
 <?php
 // Check the user's role
-if (($userRole === "volunteer" || !isset($_SESSION['user_id'])) ){
-    error_log("volunteer");
+if (($userRole === "volunteer" || !isset($userId)) ){
     // Replace with your database connection code
-    $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
 
 
-    // Fetch user information from the database based on the user's ID
-    $query = "SELECT name, last_name, email, role FROM Users WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $userId);
-    $stmt->execute();
-    $stmt->bind_result($name, $last_name, $email, $role);
-    $stmt->fetch();
-    $stmt->close();
-    $conn->close();
-
-    // Display the user's information
-    echo "<p><strong>Name:</strong> $name</p>";
-    echo "<p><strong>Last Name:</strong> $last_name</p>";
-    echo "<p><strong>Email:</strong> $email</p>";
-    echo "<p><strong>Role:</strong> $role</p>";
-} else if ($userRole === "organizer" & $_SESSION['user_id'] === $projectId) {
+} else if (isset($userId) & $userId === $organizerId) {
     echo "<p>Please log in to view your account information.</p>";
     error_log("we in");
 }
@@ -108,7 +123,6 @@ else {
 
 
 <script>
-
     /*
     Vertical Menu
      */
