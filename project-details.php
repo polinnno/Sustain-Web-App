@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 
 
 // Fetch project and organizer information from the database based on the project_id
-$query = "SELECT p.id, p.title, p.description, p.start_date, p.end_date, p.place, p.organizer_id, p.image, u.role
+$query = "SELECT p.id, p.title, p.description, p.start_date, p.end_date, p.place, p.organizer_id, p.image, u.role, u.name, u.last_name
         FROM project p
         JOIN users u ON p.organizer_id = u.id
         WHERE p.id = ? LIMIT 1";
@@ -28,7 +28,7 @@ $query = "SELECT p.id, p.title, p.description, p.start_date, p.end_date, p.place
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $projectId);
 $stmt->execute();
-$stmt->bind_result($projectId, $title, $description, $startDate, $endDate, $place, $organizerId, $image, $userRole);
+$stmt->bind_result($projectId, $title, $description, $startDate, $endDate, $place, $organizerId, $image, $userRole, $name, $lastName);
 
 if ($stmt->fetch()) {
     // Values fetched successfully
@@ -42,6 +42,9 @@ $stmt->close();
 
 // Close the database connection
 $conn->close();
+
+$imagePath = 'user-media' . DIRECTORY_SEPARATOR . $image;
+error_log($imagePath);
 
 ?>
 
@@ -91,18 +94,18 @@ $conn->close();
 </div>
 
 <div class="info">
+    <div class="head-img">
+        <img src="<?php echo $imagePath ?>" alt="">
+    </div>
     <h2><?php echo $title ?></h2>
     <p><?php echo $description; ?></p>
-    <p>Start Date: <?php echo $startDate; ?></p>
-    <p>End Date: <?php echo $endDate; ?></p>
-    <p>Location: <?php echo $place; ?></p>
-    <p>Organizer ID: <?php echo $organizerId; ?></p>
-    <p>User Role: <?php echo $userRole; ?></p>
-
-
+    <br> <br>
+    <p> <strong>Organized by <?php echo $name; ?> <?php echo $lastName; ?> </strong></p>
+    <br>
+    <p><strong>Start Date:</strong> <?php echo $startDate; ?></p>
+    <p><strong>End Date:</strong> <?php echo $endDate; ?></p>
+    <p><strong>Location:</strong> <?php echo $place; ?></p>
 </div>
-
-
 
 <?php
 // Check the user's role

@@ -73,16 +73,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Move the uploaded file to the specified directory
         $targetFilePath = 'project-media' . DIRECTORY_SEPARATOR . $fileName;
-        ///error_log($targetFilePath);
+        error_log($targetFilePath);
 
         if (move_uploaded_file($tempFilePath, $targetFilePath)) {
+
             // File was successfully uploaded, you can save $targetFilePath in the database
         } else {
             echo 'Error uploading file.';
         }
     } elseif (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
         // Use the default image when no file was uploaded
-        $targetFilePath = 'media' . DIRECTORY_SEPARATOR . 'project-default.jpg';
+        $fileName = 'project-default.jpg';
     }
 
 
@@ -99,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 // Insert data into the database
-    $sql = "INSERT INTO project (id,title, description, start_date, end_date, place, organizer_id, image)
+    $sql = "INSERT INTO project (id, title, description, start_date, end_date, place, organizer_id, image)
         VALUES ('$newProjectID', '$title', '$description', '$start_date', '$end_date', '$place', '$organizer_id', '$fileName')";
 
     if ($conn->query($sql) === TRUE) {

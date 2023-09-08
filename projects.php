@@ -24,7 +24,6 @@ if (isset($_SESSION['user_id'])) {
     $userRole = "volunteer"; // Default to volunteer if not logged in
 }
 
-
 // Close the database connection
 $conn->close();
 ?>
