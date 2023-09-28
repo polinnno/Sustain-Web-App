@@ -78,6 +78,7 @@ session_start();
     <div class="add-project-btn">
         <a href="add-project.php" class="add-project-btn">Add Project</a>
     </div>
+    <br><br><br>
     <div class="logout-btn">
         <a href="logout.php" class="btn">Log Out</a>
     </div>

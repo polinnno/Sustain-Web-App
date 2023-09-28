@@ -49,6 +49,7 @@ $conn->close();
                 echo '<a href="login.php" class="last-btn">Log in</a>';
             }
             ?>
+            <!-- TODO: dropdown menu login change-->
         </div>
     </div>
 

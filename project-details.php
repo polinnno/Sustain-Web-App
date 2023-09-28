@@ -43,7 +43,7 @@ $stmt->close();
 // Close the database connection
 $conn->close();
 
-$imagePath = 'user-media' . DIRECTORY_SEPARATOR . $image;
+$imagePath = 'project-media' . DIRECTORY_SEPARATOR . $image;
 error_log($imagePath);
 
 ?>
@@ -98,8 +98,37 @@ error_log($imagePath);
         <img src="<?php echo $imagePath ?>" alt="">
     </div>
     <h2><?php echo $title ?></h2>
+
+
+
     <p><?php echo $description; ?></p>
-    <br> <br>
+    <br>
+    <!-- Display project tags -->
+    <div class="project-tags">
+        <?php
+        // Fetch project tags associated with the project
+        $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $tagsQuery = "SELECT skill_name FROM skills WHERE project_id = ?";
+        $stmt = $conn->prepare($tagsQuery);
+        $stmt->bind_param("s", $projectId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            // Define CSS class based on tag name
+            $tagClass = strtolower(str_replace(' ', '-', $row['skill_name']));
+            echo '<span class="tag ' . $tagClass . '">' . $row['skill_name'] . '</span>';
+        }
+
+        $stmt->close();
+        $conn->close();
+        ?>
+    </div>
+    <br>
     <p> <strong>Organized by <?php echo $name; ?> <?php echo $lastName; ?> </strong></p>
     <br>
     <p><strong>Start Date:</strong> <?php echo $startDate; ?></p>

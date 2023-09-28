@@ -86,6 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $fileName = 'project-default.jpg';
     }
 
+    // Check tags:
+    if (isset($_POST['tags']) && is_array($_POST['tags'])) {
+        $selectedTags = $_POST['tags'];
+    } else {
+        $selectedTags = []; // Default to an empty array if no tags are selected
+    }
+
 
 
 // Retrieve form data
@@ -110,6 +117,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         error_log('project failed');
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
+
+if (!empty($selectedTags)) {
+    $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Insert each selected tag into the skills table
+    foreach ($selectedTags as $tag) {
+        $sql = "INSERT INTO skills (project_id, skill_name) VALUES ('$newProjectID', '$tag')";
+
+        if ($conn->query($sql) === TRUE) {
+            // Tag inserted successfully
+        } else {
+            echo "Error inserting tag: " . $conn->error;
+        }
+    }
+}
 
     $conn->close();
 }
@@ -190,6 +216,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <p></p>
             <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png">
         </div>
+
+        <!-- Inside your HTML form -->
+        <div class="input-group">
+            <br>
+            <br>
+            <label>Tags:</label>
+            <p></p>
+            <div class="checkbox-group">
+                <label for="tag1"><input type="checkbox" id="tag1" name="tags[]" value="Writing"> Writing</label><br>
+                <label for="tag2"><input type="checkbox" id="tag2" name="tags[]" value="Teaching"> Teaching</label><br>
+                <label for="tag3"><input type="checkbox" id="tag3" name="tags[]" value="Event Planning"> Event Planning</label><br>
+                <label for="tag4"><input type="checkbox" id="tag4" name="tags[]" value="Communication"> Communication</label><br>
+                <label for="tag5"><input type="checkbox" id="tag5" name="tags[]" value="Technical"> Technical</label><br>
+                <label for="tag6"><input type="checkbox" id="tag6" name="tags[]" value="Leadership"> Leadership</label><br>
+                <label for="tag7"><input type="checkbox" id="tag7" name="tags[]" value="Artistic"> Artistic</label><br>
+                <label for="tag8"><input type="checkbox" id="tag8" name="tags[]" value="Language"> Language</label><br>
+                <label for="tag9"><input type="checkbox" id="tag9" name="tags[]" value="Hands-on Tasks"> Hands-on Tasks</label><br>
+                <label for="tag10"><input type="checkbox" id="tag10" name="tags[]" value="Nature"> Nature</label><br>
+                <label for="tag11"><input type="checkbox" id="tag11" name="tags[]" value="Other"> Other</label><br>
+            </div>
+        </div>
+
 
         <button type="submit">Add Project</button>
     </form>

@@ -113,7 +113,7 @@ body {
     font-family: 'Font2', Arial, sans-serif; /* Button font */
     font-weight: bold;
     padding: 15px 70px;
-    margin-top: 30px;
+    margin-top: 5vw;
     font-size: 20px;
     align-content: center;
     width: 24%;
@@ -176,4 +176,32 @@ textarea{
     font-family: Perpetua, Font2, sans-serif;
     border-radius: 0.5vw;
     font-size: 120%;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    margin-right: 10%;
+}
+
+.checkbox-group label{
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    margin-right: 2.5vw;
+    margin-bottom: 5px;
+
+}
+
+.checkbox-group input{
+    margin: 0;
+    padding: 0;
+    border: #89d6b6;
+    border-radius: 4px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 0.8vw;
 }

@@ -136,6 +136,7 @@ nav a {
     padding: 10px 10px 70px;
 
     font-family: Perpetua, Font2, sans-serif;
+    font-size: 1.25vw;
 }
 
 .info p{
@@ -154,3 +155,92 @@ nav a {
     height: auto; /* Make the image fill its container vertically */
 }
 
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 1.25vw;
+    font-weight: bold;
+}
+
+.project-tags{
+    margin-left: 10%;
+}
+
+.writing {
+    background-color: rgba(217, 150, 135, 0.64); /* Example color for "Writing" */
+    border: 3px solid #d58573;
+    color: #c07556;
+}
+
+.teaching {
+    background-color: rgba(216, 134, 238, 0.75); /* Example color for "Teaching" */
+    border: 3px solid #b374be;
+    color: #5b386f;
+}
+
+
+/* Styles for "Event Planning" tag */
+.event-planning {
+    background-color: rgba(102, 153, 254, 0.4); /* Background color for "Event Planning" */
+    border: 3px solid #6c9cf9; /* Border color for "Event Planning" */
+    color: #35588d; /* Text color */
+}
+
+/* Styles for "Communication" tag */
+.communication {
+    background-color: rgba(252, 151, 199, 0.64); /* Background color for "Communication" */
+    border: 3px solid #e874a8; /* Border color for "Communication" */
+    color: #7b3a53; /* Text color */
+}
+
+/* Styles for "Technical" tag */
+.technical {
+    background-color: rgba(248, 198, 93, 0.41); /* Background color for "Technical" */
+    border: 3px solid #ce8c3e; /* Border color for "Technical" */
+    color: #725c2e; /* Text color */
+}
+
+/* Styles for "Leadership" tag */
+.leadership {
+    background-color: #aa00ff; /* Background color for "Leadership" */
+    border: 3px solid #aa00ff; /* Border color for "Leadership" */
+    color: white; /* Text color */
+}
+
+/* Styles for "Artistic" tag */
+.artistic {
+    background-color: #ff00aa; /* Background color for "Artistic" */
+    border: 3px solid #ff00aa; /* Border color for "Artistic" */
+    color: white; /* Text color */
+}
+
+/* Styles for "Language" tag */
+.language {
+    background-color: rgba(90, 209, 170, 0.41); /* Background color for "Language" */
+    border: 3px solid #5daa91; /* Border color for "Language" */
+    color: #4b7d60; /* Text color */
+}
+
+/* Styles for "Hands-on Tasks" tag */
+.hands-on-tasks {
+    background-color: rgba(53, 204, 248, 0.26); /* Background color for "Hands-on Tasks" */
+    border: 3px solid rgb(136, 171, 201); /* Border color for "Hands-on Tasks" */
+    color: #4e6f9b; /* Text color */
+}
+
+/* Styles for "Nature" tag */
+.nature {
+    background-color: rgba(173, 251, 139, 0.55); /* Background color for "Nature" */
+    border: 3px solid #87d275; /* Border color for "Nature" */
+    color: #5e8759; /* Text color */
+    font-family: Perpetua, sans-serif;
+}
+
+/* Styles for "Other" tag */
+.other {
+    background-color: #666; /* Background color for "Other" */
+    border: 3px solid #666; /* Border color for "Other" */
+    color: white; /* Text color */
+}

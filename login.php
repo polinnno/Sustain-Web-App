@@ -100,6 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
     <a href="register.php">Register instead?</a>
 
+    <br>
+    <br>
+    <br>
 </div>
+<br>
 </body>
 </html>

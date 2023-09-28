@@ -74,7 +74,7 @@ body {
     text-align: left;
     align-content: normal;
 
-    padding: 10px 10px 70px;
+    padding: 10px 10px 0;
 
 }
 
@@ -142,10 +142,9 @@ div{
     display: inline-block;
 
     font-size: 20px;
-    padding: 20px;
     padding-inline: 70px;
     text-decoration: none;
-    margin-bottom: 20%;
+    margin-bottom: 10%;
     margin-top: 10%;
 }
 
