@@ -162,6 +162,8 @@ nav a {
     margin-right: 10px;
     font-size: 1.25vw;
     font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .project-tags{
@@ -171,7 +173,7 @@ nav a {
 .writing {
     background-color: rgba(217, 150, 135, 0.64); /* Example color for "Writing" */
     border: 3px solid #d58573;
-    color: #c07556;
+    color: #6a341e;
 }
 
 .teaching {
@@ -204,16 +206,16 @@ nav a {
 
 /* Styles for "Leadership" tag */
 .leadership {
-    background-color: #aa00ff; /* Background color for "Leadership" */
-    border: 3px solid #aa00ff; /* Border color for "Leadership" */
-    color: white; /* Text color */
+    background-color: rgba(242, 245, 144, 0.41); /* Background color for "Leadership" */
+    border: 3px solid #ebd84a; /* Border color for "Leadership" */
+    color: #50501c; /* Text color */
 }
 
 /* Styles for "Artistic" tag */
 .artistic {
-    background-color: #ff00aa; /* Background color for "Artistic" */
-    border: 3px solid #ff00aa; /* Border color for "Artistic" */
-    color: white; /* Text color */
+    background-color: rgba(255, 176, 228, 0.55); /* Background color for "Artistic" */
+    border: 3px solid #eb97d0; /* Border color for "Artistic" */
+    color: #a13c5e; /* Text color */
 }
 
 /* Styles for "Language" tag */
@@ -240,7 +242,84 @@ nav a {
 
 /* Styles for "Other" tag */
 .other {
-    background-color: #666; /* Background color for "Other" */
+    background-color: rgba(176, 176, 176, 0.75); /* Background color for "Other" */
     border: 3px solid #666; /* Border color for "Other" */
-    color: white; /* Text color */
+    color: #363636; /* Text color */
+}
+
+.edit-btn{
+    background-color: #000000; /* Button background color */
+
+    color: #ffffff; /* Button text color */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-weight: bold;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 3vw;
+    display: inline-block;
+
+    font-size: 1.2vw;
+    padding: 1vw;
+    padding-inline: 70px;
+    text-decoration: none;
+    margin-bottom: 2%;
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.join-button {
+    background-color: #89be74;
+    color: #fff;
+    border: none;
+    border-radius: 3vw;
+    text-decoration: none;
+    font-weight: bold;
+
+    font-size: 1.2vw;
+    font-family: 'Font2', Arial, sans-serif;
+    cursor: pointer;
+    margin-top: 1vw;
+    margin-left: 10%;
+    height: fit-content;
+    width: fit-content;
+    padding: 1vw;
+    padding-inline: 70px;
+    box-shadow: 0 0 2vw 1.5vw white;
+}
+
+.join-button:hover {
+    background-color: rgba(160, 216, 227, 0.73); /* Change the background color on hover */
+}
+
+.leave-button {
+    background-color: #c05d5d;
+    color: #fff;
+    border: none;
+    border-radius: 3vw;
+    text-decoration: none;
+    font-weight: bold;
+
+    font-size: 1.2vw;
+    font-family: 'Font2', Arial, sans-serif;
+    cursor: pointer;
+    margin-top: 1vw;
+    margin-left: 10%;
+    height: fit-content;
+    width: fit-content;
+    padding: 1vw;
+    padding-inline: 70px;
+    box-shadow: 0 0 2vw 1.5vw white;
+}
+
+.leave-button:hover {
+    background-color: rgb(144, 2, 2); /* Change the background color on hover */
+}
+
+.info a:hover {
+    background-color: #89d6b6;
+}
+.edit-btn a:hover {
+    background-color: #cc0000;
 }

@@ -64,8 +64,12 @@ $conn->close();
 <div class="projects-grid">
     <?php while ($row = $result->fetch_assoc()): ?>
         <div class="project">
-            <img src="project-media/<?php echo $row["image"]; ?>" alt="Project Image">
-            <h3><?php echo $row["title"]; ?></h3>
+            <a href="project-details.php?project_id=<?php echo $row['id']; ?>">
+                <img src="project-media/<?php echo $row["image"]; ?>" alt="Project Image">
+            </a>
+            <a href="project-details.php?project_id=<?php echo $row['id']; ?>">
+                <h3><?php echo $row["title"]; ?></h3>
+            </a>
             <p><?php echo $row["description"]; ?></p>
 
             <!-- Display the "Join" button based on user role -->

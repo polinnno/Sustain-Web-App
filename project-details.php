@@ -1,21 +1,51 @@
 <?php
+session_start();
+
+// Get the user's ID from the session if logged in
+$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+
 // Fetch data from the previous page
 if (isset($_GET['project_id'])) {
     $projectId = $_GET['project_id'];
     error_log("Project ID: " . $projectId);
 
 }
-if (isset($_GET['user_id'])) {
-    $userId = $_GET['user_id'];
-    error_log("getting user id...");
-    error_log("User ID: " . $userId);
 
-}
-
-// Get all the DB entries to be displayed
 $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+}
+
+if (isset($_POST['user_id'])) {
+
+
+    $projectId = $_POST['project_id'];
+    $userId = $_POST['user_id'];
+    if (isset($_POST['join'])) {
+        $addParticipationQuery = "INSERT INTO participation (user_id, project_id) VALUES (?, ?)";
+        $stmt = $conn->prepare($addParticipationQuery);
+        $stmt->bind_param("ss", $userId, $projectId);
+
+        if ($stmt->execute()) {
+            echo "Joined successfully!";
+        } else {
+            echo "Error joining the project: " . $stmt->error;
+        }
+        header('Location: project-details.php?project_id=' . $projectId);
+        exit;
+    } elseif (isset($_POST['leave'])) {
+        $removeParticipationQuery = "DELETE FROM participation WHERE user_id = ? AND project_id = ?";
+        $stmt = $conn->prepare($removeParticipationQuery);
+        $stmt->bind_param("ss", $userId, $projectId);
+
+        if ($stmt->execute()) {
+            echo "Left the project successfully!";
+        } else {
+            echo "Error leaving the project: " . $stmt->error;
+        }    }
+    header('Location: project-details.php?project_id=' . $projectId);
+    exit;
 }
 
 
@@ -45,6 +75,9 @@ $conn->close();
 
 $imagePath = 'project-media' . DIRECTORY_SEPARATOR . $image;
 error_log($imagePath);
+
+
+$isProjectOrganizer = ($userId === $organizerId);
 
 ?>
 
@@ -124,8 +157,7 @@ error_log($imagePath);
             echo '<span class="tag ' . $tagClass . '">' . $row['skill_name'] . '</span>';
         }
 
-        $stmt->close();
-        $conn->close();
+
         ?>
     </div>
     <br>
@@ -134,24 +166,62 @@ error_log($imagePath);
     <p><strong>Start Date:</strong> <?php echo $startDate; ?></p>
     <p><strong>End Date:</strong> <?php echo $endDate; ?></p>
     <p><strong>Location:</strong> <?php echo $place; ?></p>
-</div>
+    <br>
+    <br>
+
+
+
+
 
 <?php
+
+error_log($userRole);
 // Check the user's role
-if (($userRole === "volunteer" || !isset($userId)) ){
+if (($userRole === "volunteer" || !isset($userId)) || !$isProjectOrganizer){
+
     // Replace with your database connection code
+    //TODO: move this lower
+    ?>
+<?php
+    $checkParticipationQuery = "SELECT * FROM participation WHERE user_id = ? AND project_id = ?";
+    $stmt = $conn->prepare($checkParticipationQuery);
+    $stmt->bind_param("ss", $_SESSION['user_id'], $projectId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // If a record exists, the user is already participating, show a "Leave" button
+    if ($result->num_rows > 0) {
+        echo '<form action="" method="POST" class="join-form">';
+        echo '<input type="hidden" name="project_id" value="' . $projectId . '">';
+        echo '<input type="hidden" name="user_id" value="' . $_SESSION['user_id'] . '">';
+        echo '<input type="submit" name="leave" class="leave-button" value="Leave">';
+        echo '</form>';
+    } else {
+        error_log("no participation");
+        // If no record exists, the user is not participating, show a "Join" button
+        echo '<form action="" method="POST" class="join-form">';
+        echo '<input type="hidden" name="project_id" value="' . $projectId . '">';
+        echo '<input type="hidden" name="user_id" value="' . $_SESSION['user_id'] . '">';
+        echo '<input type="submit" name="join" class="join-button" value="Join">';
+        echo '</form>';
+    }
 
 
-
-} else if (isset($userId) & $userId === $organizerId) {
-    echo "<p>Please log in to view your account information.</p>";
+} else if (isset($userId) & $isProjectOrganizer) {
+    ?>
+    <a href="edit-project.php?project_id=<?php echo $projectId; ?>" class="edit-btn">Edit</a>
+    <?php
     error_log("we in");
 }
 else {
     error_log("some guy");
 }
+
+$stmt->close();
+$conn->close();
 ?>
 
+</div>
 
 
 <script>

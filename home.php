@@ -66,7 +66,9 @@ $conn->close();
     <div class="gallery-slides-2">
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="project-2">
-                <img src="project-media/<?php echo $row["image"]; ?>" alt="Project Image">
+                <a href="project-details.php?project_id=<?php echo $row['id']; ?>">
+                    <img src="project-media/<?php echo $row["image"]; ?>" alt="Project Image">
+                </a>
                 <h3><?php echo $row["title"]; ?></h3>
             </div>
         <?php endwhile; ?>
