@@ -23,11 +23,9 @@ header {
     justify-content: center;
     align-items: center;
 }
-
 header h1, .company-name {
     font-size: 9vw;
 }
-
 h2 {
     font-family: 'Font2', Arial, sans-serif;
     font-size: 3vw;
@@ -60,6 +58,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #b8e0c7;
+
 }
 
 .info {
@@ -69,9 +68,12 @@ body {
     height: fit-content;
     border-radius: 0; /* Adjust border radius for sharp corners */
     border: 2px solid black; /* Add a black border */
+
     background-color: white;
+
     text-align: left;
     align-content: normal;
+
     padding: 10px 10px 0;
 
 }
@@ -84,10 +86,22 @@ body {
     height: 100vh;
 }
 
+
 .info p{
     padding-left: 130px;
-    font-family: Perpetua, Arial, sans-serif;
-    font-size: 18px;
+    font-family: 'Font2', Arial, sans-serif;
+    padding-bottom: 1%;
+}
+
+label {
+    position: revert;
+    transform: translateY(-50%);
+    background-color: #fff;
+    font-size: 16px;
+    transition: top 0.3s, font-size 0.6s;
+    color: #595959;
+    font-family: 'Font2', Arial, sans-serif;
+    text-align: left;
 }
 
 div{
@@ -95,73 +109,49 @@ div{
     align-content: center;
 }
 
-.info h3{
-    color: black;
-    cursor: pointer;
-    font-family: 'Font2', Arial, sans-serif;
-    font-size: 20px;
-    margin-left: 130px;
-    text-decoration: none;
-}
-
-h3{
-    margin-left: 40px;
-    text-decoration: none;
-}
-
-.date-info{
-    display: inline-block;
-    color: black;
-    text-decoration: none;
-    width: 50%;
-}
-
-.edit-button {
-    background-color: rgba(90, 118, 138, 0.8); /* Button background color */
-    color: #ffffff;
+.info a{
+    background-color: #5a768a; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: black;
     cursor: pointer;
     transition: background-color 0.3s;
-    border-radius: 3vw;
-    padding: 15px 70px 15px;
-    font-family: 'Font2', Arial, sans-serif;
-    text-decoration: none;
+    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-weight: bold;
+    margin-top: 10%;
+    margin-left: 130px;
     font-size: 20px;
-    margin-left: 50%;
+    padding: 20px;
+    padding-inline: 70px;
+    text-decoration: none;
+    border-radius: 3vw;
 }
 
-.edit-button:hover {
+.logout-btn a{
+    background-color: #000000; /* Button background color */
+
+    color: #ffffff; /* Button text color */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-weight: bold;
+    height: fit-content;
+
+    width: fit-content;
+
+    border-radius: 3vw;
+    display: inline-block;
+
+    font-size: 20px;
+    padding-inline: 70px;
+    text-decoration: none;
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
+
+
+.info a:hover {
     background-color: #89d6b6;
 }
-
-.details{
-    text-decoration: none;
-    display: inline;
-}
-details button{
-    display: inline-block;
-}
-.delete-button {
-    background-color: rgb(0, 0, 0); /* Button background color */
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 3vw;
-    padding: 15px 50px 15px;
-    font-family: 'Font2', Arial, sans-serif;
-    text-decoration: none;
-    font-size: 20px;
-    border: none;
-    margin: 0 50px 0;
-}
-
-.delete-button:hover {
-    background-color: #912424;
-}
-
-.button-container {
-    width: 50%;
-    display: inline-flex;
-    align-content: start;
-    margin-top: 3%;
-    vertical-align: top;
+.logout-btn a:hover {
+    background-color: #cc0000;
 }

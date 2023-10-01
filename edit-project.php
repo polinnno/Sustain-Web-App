@@ -12,12 +12,13 @@ if (!isset($_SESSION['user_id'])) {
 
 // Check if the project_id is set in the URL
 if (!isset($_GET['project_id'])) {
+    error_log("project not set");
     header('Location: 404.php'); // Redirect to a 404 page if project_id is not set
     exit;
 }
 
 $projectId = $_GET['project_id'];
-error_log("id is:");
+error_log("id of the project being edited is:");
 error_log($projectId);
 
 $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
@@ -113,9 +114,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $place = $_POST['place'];
     $organizer_id = $_SESSION['user_id'];
 
-    error_log($organizer_id);
-
-
 // Update the existing project in the database
     $sql = "UPDATE project SET title = ?, description = ?, start_date = ?, end_date = ?, place = ?, image = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
@@ -123,6 +121,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($stmt->execute()) {
         echo "Project updated successfully!";
+        error_log("the new title is:");
+        error_log($title);
     } else {
         echo "Error updating project: " . $stmt->error;
     }
@@ -146,6 +146,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $stmt->close();
     $conn->close();
+    header('Location: project-details.php?project_id=' . $projectId); // Redirect to the edit-project.php page with the project_id
+
 }
 ?>
 
@@ -184,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="add-project-container">
 
     <h2>Edit Project</h2>
-    <form action="edit-project.php" method="POST" enctype="multipart/form-data">
+    <form action="edit-project.php?project_id=<?php echo $projectId; ?>" method="POST" enctype="multipart/form-data">
         <div class="input-group">
             <label for="title">Title:</label>
             <p></p>
@@ -224,8 +226,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <p></p>
             <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png">
         </div>
-
-        <!-- Inside your HTML form -->
         <div class="input-group">
             <br>
             <br>
@@ -241,12 +241,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     echo '<label for="tag-' . $tag . '"><input type="checkbox" id="tag-' . $tag . '" name="tags[]" value="' . $tag . '" ' . $isChecked . '> ' . $tag . '</label><br>';
                 }
                 ?>
-
             </div>
         </div>
+            <input type="hidden" name="project_id" value="<?php echo $projectId; ?>">
+            <button type="submit">Save</button>
 
-
-        <button type="submit">Save</button>
     </form>
 </div>
 

@@ -174,6 +174,9 @@ $conn->close();
     echo '</div>'; // Close the "project" div
 }
 ?>
+    <br>
+    <br>
+</div>
 
 </body>
 </html>

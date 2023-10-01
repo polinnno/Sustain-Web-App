@@ -8,8 +8,6 @@ $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 // Fetch data from the previous page
 if (isset($_GET['project_id'])) {
     $projectId = $_GET['project_id'];
-    error_log("Project ID: " . $projectId);
-
 }
 
 $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
@@ -178,11 +176,6 @@ $isProjectOrganizer = ($userId === $organizerId);
 error_log($userRole);
 // Check the user's role
 if (($userRole === "volunteer" || !isset($userId)) || !$isProjectOrganizer){
-
-    // Replace with your database connection code
-    //TODO: move this lower
-    ?>
-<?php
     $checkParticipationQuery = "SELECT * FROM participation WHERE user_id = ? AND project_id = ?";
     $stmt = $conn->prepare($checkParticipationQuery);
     $stmt->bind_param("ss", $_SESSION['user_id'], $projectId);
@@ -197,7 +190,6 @@ if (($userRole === "volunteer" || !isset($userId)) || !$isProjectOrganizer){
         echo '<input type="submit" name="leave" class="leave-button" value="Leave">';
         echo '</form>';
     } else {
-        error_log("no participation");
         // If no record exists, the user is not participating, show a "Join" button
         echo '<form action="" method="POST" class="join-form">';
         echo '<input type="hidden" name="project_id" value="' . $projectId . '">';
@@ -208,10 +200,10 @@ if (($userRole === "volunteer" || !isset($userId)) || !$isProjectOrganizer){
 
 
 } else if (isset($userId) & $isProjectOrganizer) {
+    error_log("edit button shown")
     ?>
     <a href="edit-project.php?project_id=<?php echo $projectId; ?>" class="edit-btn">Edit</a>
     <?php
-    error_log("we in");
 }
 else {
     error_log("some guy");

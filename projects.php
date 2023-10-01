@@ -80,7 +80,6 @@ $conn->close();
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                     <?php
-                    error_log("bla");
                     endif; ?>
                     <button type="submit" class="join-button">Join</button>
                 </form>

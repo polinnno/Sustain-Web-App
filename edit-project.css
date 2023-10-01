@@ -165,7 +165,7 @@ input[type="file"]::-webkit-file-upload-button {
 
 .input-group label {
     margin-bottom: 50%;
-    padding-bottom: 200%;
+    padding-bottom: 100%;
 }
 
 textarea{
