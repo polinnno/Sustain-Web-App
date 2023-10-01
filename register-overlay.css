@@ -1,16 +1,3 @@
-@font-face {
-    font-family: 'Font1'; /* Header font */
-    src: url('media/font1/ancient-tulip-webfont.woff2') format('woff2'),
-    url('media/font1/ancient-tulip-webfont.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'Font2'; /* menu bar font */
-    src: url('media/font2/VintageGlamour.woff2') format('woff2'),
-    url('media/font2/VintageGlamour.woff') format('woff');
-}
-
-
 /* Styles for the overlay */
 .overlay-register {
     position: fixed;

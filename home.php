@@ -21,6 +21,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustain - Home</title>
+    <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="home.css">
     <!-- Favicon -->
     <link rel="icon" href="media/circle.ico" type="image/x-icon">

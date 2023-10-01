@@ -120,6 +120,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="project-history.css">
     <title>Sustain - Account</title>
 
@@ -132,11 +133,38 @@ $conn->close();
     <h1>Sustain</h1>
 </header>
 <nav>
-    <a href="home.php">Home</a>
-    <a href="projects.php">Projects</a>
-    <a href="contact.php">Contact Form</a>
-    <a href="account.php">Account</a>
+    <div class="menu-button">
+        <img src="media/menu-ico.jpg" alt="Menu" id="menu-icon" class="menu-btn">
+        <div class="menu-content" id="menu-content">
+            <!-- Add your menu options here -->
+
+
+            <a href="home.php">Home</a>
+            <a href="projects.php">Projects</a>
+            <a href="contact.php">Contact Form</a>
+            <?php
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (isset($_SESSION['user_id'])) {
+                echo '<a href="account.php" class="last-btn">Account</a>';
+            } else {
+                echo '<a href="login.php" class="last-btn">Log in</a>';
+            }
+            ?>
+            <!-- TODO: dropdown menu login change-->
+        </div>
+    </div>
+
 </nav>
+<div class="vertical-menu" id="vertical-menu">
+    <!-- Add your vertical menu options here -->
+    <a href="add-project.php">Add Project</a>
+    <a href="project-history.php">Project History</a>
+    <a href="logout.php">Log Out</a>
+</div>
+
+
 <div class="info">
     <h2>Project history</h2>
 
@@ -177,6 +205,24 @@ $conn->close();
     <br>
     <br>
 </div>
+<script>
+    /*
+    Vertical Menu
+     */
+    var verticalMenu = document.getElementById("vertical-menu");
 
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        verticalMenu.classList.toggle("open");
+    });
+
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        var verticalMenu = document.getElementById("vertical-menu");
+        if (verticalMenu.style.display === "block") {
+            verticalMenu.style.display = "none";
+        } else {
+            verticalMenu.style.display = "block";
+        }
+    });
+</script>
 </body>
 </html>

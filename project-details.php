@@ -85,6 +85,7 @@ $isProjectOrganizer = ($userId === $organizerId);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustain - Project</title>
+    <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="project-details.css">
     <!-- Favicon -->
     <link rel="icon" href="media/circle.ico" type="image/x-icon">
@@ -100,6 +101,7 @@ $isProjectOrganizer = ($userId === $organizerId);
         <div class="menu-content" id="menu-content">
             <!-- Add your menu options here -->
 
+
             <a href="home.php">Home</a>
             <a href="projects.php">Projects</a>
             <a href="contact.php">Contact Form</a>
@@ -113,10 +115,19 @@ $isProjectOrganizer = ($userId === $organizerId);
                 echo '<a href="login.php" class="last-btn">Log in</a>';
             }
             ?>
+            <!-- TODO: dropdown menu login change-->
         </div>
     </div>
 
 </nav>
+<div class="vertical-menu" id="vertical-menu">
+    <!-- Add your vertical menu options here -->
+    <a href="add-project.php">Add Project</a>
+    <a href="project-history.php">Project History</a>
+    <a href="logout.php">Log Out</a>
+</div>
+
+
 <div class="vertical-menu" id="vertical-menu">
     <!-- Add your vertical menu options here -->
     <a href="add-project.php">Add Project</a>

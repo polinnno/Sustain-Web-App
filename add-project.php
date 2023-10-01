@@ -147,6 +147,7 @@ if (!empty($selectedTags)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustain - Projects</title>
+    <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="add-project.css">
     <!-- Favicon -->
     <link rel="icon" href="media/circle.ico" type="image/x-icon">
@@ -243,6 +244,25 @@ if (!empty($selectedTags)) {
     </form>
 </div>
 
+<script>
+    /*
+    Vertical Menu
+     */
+    var verticalMenu = document.getElementById("vertical-menu");
 
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        verticalMenu.classList.toggle("open");
+    });
+
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        var verticalMenu = document.getElementById("vertical-menu");
+        if (verticalMenu.style.display === "block") {
+            verticalMenu.style.display = "none";
+        } else {
+            verticalMenu.style.display = "block";
+        }
+    });
+
+</script>
 </body>
 </html>

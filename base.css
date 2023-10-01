@@ -1,0 +1,129 @@
+/* CSS styles for the home page */
+@font-face {
+    font-family: 'Font1'; /* Header font */
+    src: url('media/font1/ancient-tulip-webfont.woff2') format('woff2'),
+    url('media/font1/ancient-tulip-webfont.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Font2'; /* menu bar font */
+    src: url('media/font2/VintageGlamour.woff2') format('woff2'),
+    url('media/font2/VintageGlamour.woff') format('woff');
+}
+
+header {
+    font-family: 'Font1', Arial, sans-serif;
+    background-image: url('media/home_banner.jpg');
+    height: 220px;
+    background-size: contain;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #abdbb7;
+    text-align: center;
+    font-size: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1, .company-name {
+    font-size: 9vw;
+}
+
+h2 {
+    font-family: 'Font2', Arial, sans-serif;
+    font-size: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: lighter;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #b8e0c7;
+
+}
+
+nav {
+    background-color: #5a768a;
+    color: #89d6b6;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0;
+}
+
+
+nav a {
+    color: #ffffff;
+    font-family: 'Font2', Arial, sans-serif;
+    text-decoration: none;
+    margin: 0 19px;
+    font-weight: bold;
+    display: inline;
+}
+
+
+.menu-btn{
+    align-self: start;
+    max-height: 20px;
+    margin-right: 30%;
+    margin-left: 0;
+    display: inline;
+}
+
+.menu-content{
+    display: inline;
+}
+
+.menu-button{
+    display: inline;
+    margin-right: 30%;
+}
+
+#menu-icon {
+    cursor: pointer;
+}
+
+.vertical-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #5a768a;
+    font-family: Font2, sans-serif;
+    min-width: 20%;
+    z-index: 1;
+    margin-right: 80%;
+    text-align: center;
+    border-bottom-right-radius: 2vw;
+    border-bottom-left-radius: 2vw;
+    max-height: 0;
+    overflow: hidden;
+    width: 20%;
+}
+
+.vertical-menu a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: white;
+    text-align-all: center;
+    font-weight: bold;
+    margin: 3%;
+}
+
+.menu-button:hover .vertical-menu {
+    max-height: 200px; /* Adjust the maximum height as needed */
+    transition: max-height 0.9s ease-in-out; /* Add this line */
+}
+
+.vertical-menu.open {
+    max-height: 200px; /* Adjust the maximum height as needed */
+}
+
+
