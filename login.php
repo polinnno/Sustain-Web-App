@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <nav>
     <a href="home.php">Home</a>
     <a href="projects.php">Projects</a>
-    <a href="contact.html">Contact Form</a>
+    <a href="contact.php">Contact Form</a>
     <?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();

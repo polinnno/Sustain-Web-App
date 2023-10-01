@@ -134,7 +134,7 @@ $conn->close();
 <nav>
     <a href="home.php">Home</a>
     <a href="projects.php">Projects</a>
-    <a href="contact.html">Contact Form</a>
+    <a href="contact.php">Contact Form</a>
     <a href="account.php">Account</a>
 </nav>
 <div class="info">

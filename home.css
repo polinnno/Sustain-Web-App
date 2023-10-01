@@ -32,7 +32,7 @@ header {
 }
 
 header h1, .company-name {
-    font-size: 9vw; /* Adjust font size as needed */
+    font-size: 9vw;
 }
 
 h2 {

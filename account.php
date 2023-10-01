@@ -19,20 +19,38 @@ session_start();
     <h1>Sustain</h1>
 </header>
 <nav>
-    <a href="home.php">Home</a>
-    <a href="projects.php">Projects</a>
-    <a href="contact.html">Contact Form</a>
-    <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    if (isset($_SESSION['user_id'])) {
-        echo '<a href="account.php">Account</a>';
-    } else {
-        echo '<a href="login.php">Log in</a>';
-    }
-    ?>
+    <div class="menu-button">
+        <img src="media/menu-ico.jpg" alt="Menu" id="menu-icon" class="menu-btn">
+        <div class="menu-content" id="menu-content">
+            <!-- Add your menu options here -->
+
+
+            <a href="home.php">Home</a>
+            <a href="projects.php">Projects</a>
+            <a href="contact.php">Contact Form</a>
+            <?php
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (isset($_SESSION['user_id'])) {
+                echo '<a href="account.php" class="last-btn">Account</a>';
+            } else {
+                echo '<a href="login.php" class="last-btn">Log in</a>';
+            }
+            ?>
+            <!-- TODO: dropdown menu login change-->
+        </div>
+    </div>
+
 </nav>
+<div class="vertical-menu" id="vertical-menu">
+    <!-- Add your vertical menu options here -->
+    <a href="add-project.php">Add Project</a>
+    <a href="project-history.php">Project History</a>
+    <a href="logout.php">Log Out</a>
+</div>
+
+
 <div class="info">
     <h2>My Account</h2>
     <?php
@@ -82,9 +100,27 @@ session_start();
     <div class="logout-btn">
         <a href="logout.php" class="btn">Log Out</a>
     </div>
-
-
-
 </div>
+
+<script>
+    /*
+    Vertical Menu
+     */
+    var verticalMenu = document.getElementById("vertical-menu");
+
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        verticalMenu.classList.toggle("open");
+    });
+
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        var verticalMenu = document.getElementById("vertical-menu");
+        if (verticalMenu.style.display === "block") {
+            verticalMenu.style.display = "none";
+        } else {
+            verticalMenu.style.display = "block";
+        }
+    });
+
+</script>
 </body>
 </html>

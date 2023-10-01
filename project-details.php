@@ -84,7 +84,7 @@ $isProjectOrganizer = ($userId === $organizerId);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sustain - Home</title>
+    <title>Sustain - Project</title>
     <link rel="stylesheet" href="project-details.css">
     <!-- Favicon -->
     <link rel="icon" href="media/circle.ico" type="image/x-icon">
@@ -102,7 +102,7 @@ $isProjectOrganizer = ($userId === $organizerId);
 
             <a href="home.php">Home</a>
             <a href="projects.php">Projects</a>
-            <a href="contact.html">Contact Form</a>
+            <a href="contact.php">Contact Form</a>
             <?php
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();

@@ -1,4 +1,5 @@
 <?php
+session_start();
 $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
 
 // Check connection
@@ -13,8 +14,13 @@ $result = $conn->query($sql);
 // Settings for "Join" Button
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $role_query = "SELECT role FROM users WHERE id = $user_id";
-    $role_result = $conn->query($role_query);
+
+    // Use a prepared statement to prevent SQL injection
+    $role_query = "SELECT role FROM users WHERE id = ?";
+    $stmt = $conn->prepare($role_query);
+    $stmt->bind_param("i", $user_id); // "i" represents an integer, change it if user_id is of a different type
+    $stmt->execute();
+    $role_result = $stmt->get_result();
 
     if ($role_result->num_rows > 0) {
         $row = $role_result->fetch_assoc();
@@ -47,7 +53,7 @@ $conn->close();
 <nav>
     <a href="home.php">Home</a>
     <a href="projects.php">Projects</a>
-    <a href="contact.html">Contact Form</a>
+    <a href="contact.php">Contact Form</a>
     <?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
