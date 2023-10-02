@@ -19,12 +19,6 @@
 }
 
 
-.info p{
-    padding-left: 130px;
-    font-family: 'Font2', Arial, sans-serif;
-    padding-bottom: 1%;
-}
-
 label {
     position: revert;
     transform: translateY(-50%);
@@ -47,7 +41,7 @@ textarea{
     width: 100%;
     min-height: 300px;
     padding: 0;
-    border: 2px solid black;
+    border: 1.5px solid black;
     border-radius: 0;
 }
 
@@ -78,3 +72,52 @@ button {
 button:hover {
     background-color: #89d6b6;
 }
+
+.company-info{
+    width: 30%;
+    display: inline-block;
+    align-content: end;
+}
+
+.map{
+    width:80%;
+    height: 150px;
+    overflow: hidden;
+    margin-inline: 130px;
+    margin-bottom: 30px;
+    border-radius: 1vw;
+}
+
+.map iframe{
+    width: 100%;
+    height: 100%;
+}
+
+h3{
+    font-family: Font2, sans-serif;
+    font-style: normal;
+    align-self: center;
+}
+.address{
+    font-family: Perpetua, Font2, sans-serif;
+    vertical-align: top;
+    align-self: end;
+    width: 100%;
+    left: 0;
+    position: relative;
+    font-size: 16px;
+
+}
+
+.user-info{
+    font-family: Font2, Perpetua, sans-serif;
+    display: inline-block;
+    width: 50%;
+    margin-left: 130px;
+
+}
+
+.all-info{
+    display: inline;
+}
+

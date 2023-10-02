@@ -6,7 +6,7 @@ body{
     position: relative;
     overflow: hidden;
     margin: 0 auto; /* Center the gallery */
-    height: 1000px;
+    height: 300px;
 }
 
 .gallery-slides {

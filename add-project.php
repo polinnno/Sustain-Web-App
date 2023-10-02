@@ -16,6 +16,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
+
+    /*
+     * Subscription submission
+     */
+    if (isset($_POST['subscribe'])) {
+        // Get the email from the form
+        $email = $_POST['email'];
+
+        // Validate the email (you can add more robust validation)
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            // Prepare and execute the SQL query to insert the email into the database
+            $query = "INSERT INTO subscribers (email) VALUES (?)";
+            $stmt = $conn->prepare($query);
+
+            if ($stmt) {
+                $stmt->bind_param("s", $email);
+                if ($stmt->execute()) {
+                    echo "Thank you for subscribing!";
+                } else {
+                    echo "Error adding email: " . $stmt->error;
+                }
+                $stmt->close();
+            } else {
+                echo "Error preparing statement: " . $conn->error;
+            }
+        } else {
+            echo "Invalid email address.";
+        }
+    }
+
+
     // Generate a unique Project ID
     function generateUniqueProjectID($length = 4) {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -158,21 +189,46 @@ if (!empty($selectedTags)) {
     <h1>Sustain</h1>
 </header>
 <nav>
-    <a href="home.php">Home</a>
-    <a href="projects.php">Projects</a>
-    <a href="contact.php">Contact Form</a>
+    <div class="menu-button">
+        <img src="media/menu-ico.jpg" alt="Menu" id="menu-icon" class="menu-btn">
+        <div class="menu-content" id="menu-content">
+            <!-- Add your menu options here -->
+
+
+            <a href="home.php">Home</a>
+            <a href="projects.php">Projects</a>
+            <a href="contact.php">Contact Form</a>
+            <?php
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (isset($_SESSION['user_id'])) {
+                echo '<a href="account.php" class="last-btn">Account</a>';
+            } else {
+                echo '<a href="login.php" class="last-btn">Log in</a>';
+            }
+            ?>
+            <!-- TODO: dropdown menu login change-->
+        </div>
+    </div>
+
+</nav>
+<div class="vertical-menu" id="vertical-menu">
+    <!-- Add your vertical menu options here -->
+    <a href="add-project.php">Add Project</a>
+    <a href="project-history.php">Project History</a>
     <?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
     if (isset($_SESSION['user_id'])) {
-        echo '<a href="account.php">Account</a>';
+        echo '<a href="logout.php">Log Out</a>';
     } else {
-        echo '<a href="login.php">Log in</a>';
+        echo '<a href="login.php" class="last-btn">Log in</a>';
     }
     ?>
+</div>
 
-</nav>
 
 <div class="add-project-container">
 
@@ -243,7 +299,23 @@ if (!empty($selectedTags)) {
         <button type="submit">Add Project</button>
     </form>
 </div>
-
+<div class="footer-content">
+    <div class="footer-links">
+        <a href="home.php">Home</a> <br><br>
+        <a href="projects.php">Projects</a><br><br>
+        <a href="contact.php">Contact</a><br><br>
+        <a href="account.php">About</a><br><br>
+    </div>
+    <div class="footer-info">
+        <h3>Contact Us</h3>
+        <p>1234 Elm Street<br>Cityville, ST 56789</p>
+        <p>Phone: (123) 456-7890<br>Email: info@example.com</p>
+    </div>
+    <form id="subscription-form" method="POST">
+        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+        <button type="submit" name="subscribe">Subscribe</button>
+    </form>
+</div>
 <script>
     /*
     Vertical Menu

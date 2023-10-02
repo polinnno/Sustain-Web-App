@@ -97,3 +97,27 @@ div{
     background-color: #cc0000;
 }
 
+.user-info{
+    display: inline-block;
+    width: 30%;
+    margin-right: 10%;
+    margin-top: 30px;
+    vertical-align: top;
+}
+
+.pp{
+    display: inline-block;
+    border-radius: 99vw;
+    overflow: hidden;
+    height: 300px;
+    width: 300px;
+    right: 0;
+    border: 2px solid black;
+    margin-left: 20%;
+}
+.pp img{
+    height:300px;
+    width: 300px;
+    right: 0;
+    object-fit: cover;
+}

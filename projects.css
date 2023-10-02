@@ -35,8 +35,6 @@ body{
     margin: 10px auto;
 }
 
-
-
 .project p{
     font-family: Perpetua, 'Font2', sans-serif;
     font-size: large;
@@ -68,4 +66,64 @@ body{
 .join-form {
     padding: 0;
     display: inline;
+}
+
+.search-bar {
+    align-content: center;
+    width: 60%;
+    align-self: center;
+    margin: 0 20% 0 35%;
+    position: page;
+    overflow: hidden;
+}
+.search-bar input{
+    border-radius: 4vw;
+    left: 0;
+    text-decoration: none;
+    border: 1px solid darkgray;
+    min-height: 2vw;
+    width: 40%;
+    align-self: start;
+    font-family: Perpetua, Font2, sans-serif;
+    font-size: 1.3vw;
+    min-width: 50%;
+
+
+}
+
+#search-button {
+    align-self: end;
+    position: sticky;
+    min-height: 2vw;
+    border: none;
+    font-size: 1.3vw;
+    font-family: Perpetua, Font2, sans-serif;
+    border-radius: 4vw;
+    color: white;
+    cursor: pointer;
+    background-color: black;
+    padding-inline: 10px;
+    width: 8%;
+}
+
+a.edit-btn{
+    display: inline-block;
+    background-color: #a9b9a1;
+    color: #fff;
+    border: none;
+    border-radius: 2vw;
+    text-decoration: none;
+    font-size: 1.2vw;
+    font-family: 'Font2', Arial, sans-serif;
+    cursor: pointer;
+
+    box-shadow: 0 0 2vw 1.5vw white;
+    height: fit-content;
+    width: fit-content;
+    padding-inline: 10%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+
+    margin-top: 20px;
+    bottom: 0;
 }

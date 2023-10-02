@@ -50,6 +50,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->close();
     }
 }
+
+$conn = new mysqli("localhost", "root", "root", "it210_sustain");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+/*
+ * Subscription submission
+ */
+if (isset($_POST['subscribe'])) {
+    // Get the email from the form
+    $email = $_POST['email'];
+
+    // Validate the email (you can add more robust validation)
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // Prepare and execute the SQL query to insert the email into the database
+        $query = "INSERT INTO subscribers (email) VALUES (?)";
+        $stmt = $conn->prepare($query);
+
+        if ($stmt) {
+            $stmt->bind_param("s", $email);
+            if ($stmt->execute()) {
+                echo "Thank you for subscribing!";
+            } else {
+                echo "Error adding email: " . $stmt->error;
+            }
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . $conn->error;
+        }
+    } else {
+        echo "Invalid email address.";
+    }
+    $stmt->close();
+    $conn->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +133,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Add your vertical menu options here -->
     <a href="add-project.php">Add Project</a>
     <a href="project-history.php">Project History</a>
-    <a href="logout.php">Log Out</a>
+    <?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (isset($_SESSION['user_id'])) {
+        echo '<a href="logout.php">Log Out</a>';
+    } else {
+        echo '<a href="login.php" class="last-btn">Log in</a>';
+    }
+    ?>
 </div>
 
 

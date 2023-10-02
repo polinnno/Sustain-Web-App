@@ -1,5 +1,38 @@
 <?php
 session_start();
+
+$conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+/*
+ * Subscription submission
+ */
+if (isset($_POST['subscribe'])) {
+    // Get the email from the form
+    $email = $_POST['email'];
+
+    // Validate the email (you can add more robust validation)
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // Prepare and execute the SQL query to insert the email into the database
+        $query = "INSERT INTO subscribers (email) VALUES (?)";
+        $stmt = $conn->prepare($query);
+
+        if ($stmt) {
+            $stmt->bind_param("s", $email);
+            if ($stmt->execute()) {
+            } else {
+                echo "Error adding email: " . $stmt->error;
+            }
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . $conn->error;
+        }
+    } else {
+        echo "Invalid email address.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,43 +81,58 @@ session_start();
     <!-- Add your vertical menu options here -->
     <a href="add-project.php">Add Project</a>
     <a href="project-history.php">Project History</a>
-    <a href="logout.php">Log Out</a>
+    <?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (isset($_SESSION['user_id'])) {
+        echo '<a href="logout.php">Log Out</a>';
+    } else {
+        echo '<a href="login.php" class="last-btn">Log in</a>';
+    }
+    ?>
+
 </div>
 
 
 <div class="info">
     <h2>My Account</h2>
-    <?php
-    // Check if the user is logged in
-    if (isset($_SESSION['user_id'])) {
-        // Replace with your database connection code
-        $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+    <div class="user-info">
+        <?php
+        // Check if the user is logged in
+        if (isset($_SESSION['user_id'])) {
+            // Replace with your database connection code
+            $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $userId = $_SESSION['user_id'];
+
+            // Fetch user information from the database based on the user's ID
+            $query = "SELECT name, last_name, email, role, image FROM Users WHERE id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s", $userId);
+            $stmt->execute();
+            $stmt->bind_result($name, $last_name, $email, $role, $image);
+            $stmt->fetch();
+            $stmt->close();
+            $conn->close();
+
+            // Display the user's information
+            echo "<p><strong>Name:</strong> $name</p>";
+            echo "<p><strong>Last Name:</strong> $last_name</p>";
+            echo "<p><strong>Email:</strong> $email</p>";
+            echo "<p><strong>Role:</strong> $role</p>";
+        } else {
+            echo "<p>Please log in to view your account information.</p>";
         }
+        ?>
+    </div>
+    <div class="pp">
+        <img src="<?php echo 'user-media' . DIRECTORY_SEPARATOR . $image ?>" alt="">
 
-        $userId = $_SESSION['user_id'];
-
-        // Fetch user information from the database based on the user's ID
-        $query = "SELECT name, last_name, email, role FROM Users WHERE id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("s", $userId);
-        $stmt->execute();
-        $stmt->bind_result($name, $last_name, $email, $role);
-        $stmt->fetch();
-        $stmt->close();
-        $conn->close();
-
-        // Display the user's information
-        echo "<p><strong>Name:</strong> $name</p>";
-        echo "<p><strong>Last Name:</strong> $last_name</p>";
-        echo "<p><strong>Email:</strong> $email</p>";
-        echo "<p><strong>Role:</strong> $role</p>";
-    } else {
-        echo "<p>Please log in to view your account information.</p>";
-    }
-    ?>
-
+    </div>
     <!-- TODO: add photo spawn -->
 
     <p> </p>
@@ -102,7 +150,23 @@ session_start();
         <a href="logout.php" class="btn">Log Out</a>
     </div>
 </div>
-
+<div class="footer-content">
+    <div class="footer-links">
+        <a href="home.php">Home</a> <br><br>
+        <a href="projects.php">Projects</a><br><br>
+        <a href="contact.php">Contact</a><br><br>
+        <a href="account.php">About</a><br><br>
+    </div>
+    <div class="footer-info">
+        <h3>Contact Us</h3>
+        <p>1234 Elm Street<br>Cityville, ST 56789</p>
+        <p>Phone: (123) 456-7890<br>Email: info@example.com</p>
+    </div>
+    <form id="subscription-form" method="POST">
+        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+        <button type="submit" name="subscribe">Subscribe</button>
+    </form>
+</div>
 <script>
     /*
     Vertical Menu

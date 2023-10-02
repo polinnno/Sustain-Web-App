@@ -7,6 +7,36 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+/*
+ * Subscription submission
+ */
+if (isset($_POST['subscribe'])) {
+    // Get the email from the form
+    $email = $_POST['email'];
+
+    // Validate the email (you can add more robust validation)
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // Prepare and execute the SQL query to insert the email into the database
+        $query = "INSERT INTO subscribers (email) VALUES (?)";
+        $stmt = $conn->prepare($query);
+
+        if ($stmt) {
+            $stmt->bind_param("s", $email);
+            if ($stmt->execute()) {
+                echo "Thank you for subscribing!";
+            } else {
+                echo "Error adding email: " . $stmt->error;
+            }
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . $conn->error;
+        }
+    } else {
+        echo "Invalid email address.";
+    }
+}
+
+
 // Fetch project data from the database
 $sql = "SELECT * FROM project";
 $result = $conn->query($sql);
@@ -60,7 +90,16 @@ $conn->close();
     <!-- Add your vertical menu options here -->
     <a href="add-project.php">Add Project</a>
     <a href="project-history.php">Project History</a>
-    <a href="logout.php">Log Out</a>
+    <?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (isset($_SESSION['user_id'])) {
+        echo '<a href="logout.php">Log Out</a>';
+    } else {
+        echo '<a href="login.php" class="last-btn">Log in</a>';
+    }
+    ?>
 </div>
 
 
@@ -152,6 +191,23 @@ $conn->close();
 
     </div>
 </section>
+<div class="footer-content">
+    <div class="footer-links">
+        <a href="home.php">Home</a> <br><br>
+        <a href="projects.php">Projects</a><br><br>
+        <a href="contact.php">Contact</a><br><br>
+        <a href="account.php">About</a><br><br>
+    </div>
+    <div class="footer-info">
+        <h3>Contact Us</h3>
+        <p>1234 Elm Street<br>Cityville, ST 56789</p>
+        <p>Phone: (123) 456-7890<br>Email: info@example.com</p>
+    </div>
+    <form id="subscription-form" method="POST">
+        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+        <button type="submit" name="subscribe">Subscribe</button>
+    </form>
+</div>
 <script>
     /*
     Moving Gallery
