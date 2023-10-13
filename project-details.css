@@ -1,18 +1,13 @@
 .info {
     margin: 3% auto 10%;
-    width: 65%; /* Adjust width as needed */
-
+    width: 65%;
     height: fit-content;
-    border-radius: 0; /* Adjust border radius for sharp corners */
-    border: 2px solid black; /* Add a black border */
-
+    border-radius: 0;
+    border: 2px solid black;
     background-color: white;
-
     text-align: left;
     align-content: normal;
-
     padding: 10px 10px 70px;
-
     font-family: Perpetua, Font2, sans-serif;
     font-size: 1.25vw;
 }
@@ -30,7 +25,7 @@
 .head-img img{
     object-fit: contain;
     width: 100%;
-    height: auto; /* Make the image fill its container vertically */
+    height: auto;
 }
 
 .tag {
@@ -49,89 +44,79 @@
 }
 
 .writing {
-    background-color: rgba(217, 150, 135, 0.64); /* Example color for "Writing" */
+    background-color: rgba(217, 150, 135, 0.64);
     border: 3px solid #d58573;
     color: #6a341e;
 }
 
 .teaching {
-    background-color: rgba(216, 134, 238, 0.75); /* Example color for "Teaching" */
+    background-color: rgba(216, 134, 238, 0.75);
     border: 3px solid #b374be;
     color: #5b386f;
 }
 
 
-/* Styles for "Event Planning" tag */
 .event-planning {
-    background-color: rgba(102, 153, 254, 0.4); /* Background color for "Event Planning" */
-    border: 3px solid #6c9cf9; /* Border color for "Event Planning" */
-    color: #35588d; /* Text color */
+    background-color: rgba(102, 153, 254, 0.4);
+    border: 3px solid #6c9cf9;
+    color: #35588d;
 }
 
-/* Styles for "Communication" tag */
 .communication {
-    background-color: rgba(252, 151, 199, 0.64); /* Background color for "Communication" */
-    border: 3px solid #e874a8; /* Border color for "Communication" */
-    color: #7b3a53; /* Text color */
+    background-color: rgba(252, 151, 199, 0.64);
+    border: 3px solid #e874a8;
+    color: #7b3a53;
 }
 
-/* Styles for "Technical" tag */
 .technical {
-    background-color: rgba(248, 198, 93, 0.41); /* Background color for "Technical" */
-    border: 3px solid #ce8c3e; /* Border color for "Technical" */
-    color: #725c2e; /* Text color */
+    background-color: rgba(248, 198, 93, 0.41);
+    border: 3px solid #ce8c3e;
+    color: #725c2e;
 }
 
-/* Styles for "Leadership" tag */
 .leadership {
-    background-color: rgba(242, 245, 144, 0.41); /* Background color for "Leadership" */
-    border: 3px solid #ebd84a; /* Border color for "Leadership" */
-    color: #50501c; /* Text color */
+    background-color: rgba(242, 245, 144, 0.41);
+    border: 3px solid #ebd84a;
+    color: #50501c;
 }
 
-/* Styles for "Artistic" tag */
 .artistic {
-    background-color: rgba(255, 176, 228, 0.55); /* Background color for "Artistic" */
-    border: 3px solid #eb97d0; /* Border color for "Artistic" */
-    color: #a13c5e; /* Text color */
+    background-color: rgba(255, 176, 228, 0.55);
+    border: 3px solid #eb97d0;
+    color: #a13c5e;
 }
 
-/* Styles for "Language" tag */
 .language {
-    background-color: rgba(90, 209, 170, 0.41); /* Background color for "Language" */
-    border: 3px solid #5daa91; /* Border color for "Language" */
-    color: #4b7d60; /* Text color */
+    background-color: rgba(90, 209, 170, 0.41);
+    border: 3px solid #5daa91;
+    color: #4b7d60;
 }
 
-/* Styles for "Hands-on Tasks" tag */
 .hands-on-tasks {
-    background-color: rgba(53, 204, 248, 0.26); /* Background color for "Hands-on Tasks" */
-    border: 3px solid rgb(136, 171, 201); /* Border color for "Hands-on Tasks" */
-    color: #4e6f9b; /* Text color */
+    background-color: rgba(53, 204, 248, 0.26);
+    border: 3px solid rgb(136, 171, 201);
+    color: #4e6f9b;
 }
 
-/* Styles for "Nature" tag */
 .nature {
-    background-color: rgba(173, 251, 139, 0.55); /* Background color for "Nature" */
-    border: 3px solid #87d275; /* Border color for "Nature" */
-    color: #5e8759; /* Text color */
+    background-color: rgba(173, 251, 139, 0.55);
+    border: 3px solid #87d275;
+    color: #5e8759;
     font-family: Perpetua, sans-serif;
 }
 
-/* Styles for "Other" tag */
 .other {
-    background-color: rgba(176, 176, 176, 0.75); /* Background color for "Other" */
-    border: 3px solid #666; /* Border color for "Other" */
-    color: #363636; /* Text color */
+    background-color: rgba(176, 176, 176, 0.75);
+    border: 3px solid #666;
+    color: #363636;
 }
 
 .edit-btn{
-    background-color: #000000; /* Button background color */
-
-    color: #ffffff; /* Button text color */
+    background-color: #000000;
+    color: #ffffff;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-family: 'Font2', Arial, sans-serif;
     font-weight: bold;
     height: fit-content;
     width: fit-content;
@@ -168,7 +153,7 @@
 }
 
 .join-button:hover {
-    background-color: rgba(160, 216, 227, 0.73); /* Change the background color on hover */
+    background-color: rgba(160, 216, 227, 0.73);
 }
 
 .leave-button {
@@ -192,7 +177,7 @@
 }
 
 .leave-button:hover {
-    background-color: rgb(144, 2, 2); /* Change the background color on hover */
+    background-color: rgb(144, 2, 2);
 }
 
 .info a:hover {

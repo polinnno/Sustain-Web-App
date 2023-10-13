@@ -1,12 +1,11 @@
-/* CSS styles for the home page */
 @font-face {
-    font-family: 'Font1'; /* Header font */
+    font-family: 'Font1';
     src: url('media/font1/ancient-tulip-webfont.woff2') format('woff2'),
     url('media/font1/ancient-tulip-webfont.woff') format('woff');
 }
 
 @font-face {
-    font-family: 'Font2'; /* menu bar font */
+    font-family: 'Font2';
     src: url('media/font2/VintageGlamour.woff2') format('woff2'),
     url('media/font2/VintageGlamour.woff') format('woff');
 }
@@ -83,7 +82,7 @@ nav a {
 
 .menu-button{
     display: inline;
-    margin-right: 30%;
+    left: 0;
 }
 
 #menu-icon {
@@ -118,15 +117,14 @@ nav a {
 }
 
 .menu-button:hover .vertical-menu {
-    max-height: 200px; /* Adjust the maximum height as needed */
-    transition: max-height 0.9s ease-in-out; /* Add this line */
+    max-height: 200px;
+    transition: max-height 0.9s ease-in-out;
 }
 
 .vertical-menu.open {
-    max-height: 200px; /* Adjust the maximum height as needed */
+    max-height: 200px;
 }
 
-/* Style for the footer */
 footer {
     background-color: #333;
     color: #fff;
@@ -220,5 +218,27 @@ footer a:hover {
     padding-bottom: 10px;
 }
 
+#user{
+    color: #97bdc5;
+    font-family: Font2, sans-serif;
+    font-weight: bolder;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    align-self: end;
+    margin-left: 25%;
+}
+
+#empty-user{
+    color: #97bdc5;
+    font-family: Font2, sans-serif;
+    font-weight: bolder;
+    display: inline-block;
+    padding: 0;
+    padding-inline: 60px;
+    margin: 0;
+    align-self: end;
+    margin-left: 25%;
+}
 
 

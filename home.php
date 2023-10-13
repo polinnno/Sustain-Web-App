@@ -1,108 +1,22 @@
 <?php
 session_start();
 $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
-
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-/*
- * Subscription submission
- */
-if (isset($_POST['subscribe'])) {
-    // Get the email from the form
-    $email = $_POST['email'];
+include('header.php');
 
-    // Validate the email (you can add more robust validation)
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Prepare and execute the SQL query to insert the email into the database
-        $query = "INSERT INTO subscribers (email) VALUES (?)";
-        $stmt = $conn->prepare($query);
-
-        if ($stmt) {
-            $stmt->bind_param("s", $email);
-            if ($stmt->execute()) {
-                echo "Thank you for subscribing!";
-            } else {
-                echo "Error adding email: " . $stmt->error;
-            }
-            $stmt->close();
-        } else {
-            echo "Error preparing statement: " . $conn->error;
-        }
-    } else {
-        echo "Invalid email address.";
-    }
-}
-
-
-// Fetch project data from the database
 $sql = "SELECT * FROM project";
 $result = $conn->query($sql);
-
-// Close the database connection
 $conn->close();
 ?>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustain - Home</title>
-    <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="home.css">
-    <!-- Favicon -->
-    <link rel="icon" href="media/circle.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="media/circle.ico" type="image/x-icon">
 </head>
 <body>
-<header>
-    <h1>Sustain</h1>
-</header>
-<nav>
-    <div class="menu-button">
-        <img src="media/menu-ico.jpg" alt="Menu" id="menu-icon" class="menu-btn">
-        <div class="menu-content" id="menu-content">
-            <!-- Add your menu options here -->
-
-
-            <a href="home.php">Home</a>
-            <a href="projects.php">Projects</a>
-            <a href="contact.php">Contact Form</a>
-            <?php
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
-            if (isset($_SESSION['user_id'])) {
-                echo '<a href="account.php" class="last-btn">Account</a>';
-            } else {
-                echo '<a href="login.php" class="last-btn">Log in</a>';
-            }
-            ?>
-            <!-- TODO: dropdown menu login change-->
-        </div>
-    </div>
-
-</nav>
-<div class="vertical-menu" id="vertical-menu">
-    <!-- Add your vertical menu options here -->
-    <a href="add-project.php">Add Project</a>
-    <a href="project-history.php">Project History</a>
-    <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    if (isset($_SESSION['user_id'])) {
-        echo '<a href="logout.php">Log Out</a>';
-    } else {
-        echo '<a href="login.php" class="last-btn">Log in</a>';
-    }
-    ?>
-</div>
-
-
 <div class="projects-rotating-gallery">
     <div class="gallery-slides-2">
         <?php while ($row = $result->fetch_assoc()): ?>
@@ -187,34 +101,16 @@ $conn->close();
         <div class="gallery-slide" id="slide-10">
             <img src="media/home-gallery/10.jpg" alt="Slide 10" class="gallery-image main-slide">
         </div>
-
-
     </div>
 </section>
-<div class="footer-content">
-    <div class="footer-links">
-        <a href="home.php">Home</a> <br><br>
-        <a href="projects.php">Projects</a><br><br>
-        <a href="contact.php">Contact</a><br><br>
-        <a href="account.php">About</a><br><br>
-    </div>
-    <div class="footer-info">
-        <h3>Contact Us</h3>
-        <p>1234 Elm Street<br>Cityville, ST 56789</p>
-        <p>Phone: (123) 456-7890<br>Email: info@example.com</p>
-    </div>
-    <form id="subscription-form" method="POST">
-        <input type="email" name="email" id="email" placeholder="Enter your email" required>
-        <button type="submit" name="subscribe">Subscribe</button>
-    </form>
-</div>
+<?php include('footer.php'); ?>
 <script>
     /*
     Moving Gallery
      */
     const slidesContainer = document.querySelector('.gallery-slides');
     const slides = document.querySelectorAll('.gallery-slide');
-    const slideWidth = slides[0].offsetWidth; // Assuming all slides have the same width
+    const slideWidth = slides[0].offsetWidth;
 
     function startContinuousScrolling() {
         let currentPosition = 0;
@@ -223,46 +119,26 @@ $conn->close();
             currentPosition -= 1; // Move by 1 pixel at a time
             slidesContainer.style.transform = `translateX(${currentPosition}px)`;
 
-            // Reset position to the right when it reaches the end
+            // Reset position
             if (currentPosition <= -slideWidth) {
                 currentPosition = slideWidth;
             }
 
-            requestAnimationFrame(moveSlides); // Continue animation
+            requestAnimationFrame(moveSlides);
         }
-        // Start the continuous scrolling animation
         moveSlides();
     }
 
     startContinuousScrolling();
 
     /*
-    Vertical Menu
-     */
-    var verticalMenu = document.getElementById("vertical-menu");
-
-    document.getElementById("menu-icon").addEventListener("click", function () {
-        verticalMenu.classList.toggle("open");
-    });
-
-    document.getElementById("menu-icon").addEventListener("click", function () {
-        var verticalMenu = document.getElementById("vertical-menu");
-        if (verticalMenu.style.display === "block") {
-            verticalMenu.style.display = "none";
-        } else {
-            verticalMenu.style.display = "block";
-        }
-    });
-
-
-    /*
     Rotating Project Gallery:
      */
     const slidesContainer_2 = document.querySelector('.gallery-slides-2');
     const projects = document.querySelectorAll('.project-2');
-    const slideWidth_2 = projects[0].offsetWidth; // Width of one project
+    const slideWidth_2 = projects[0].offsetWidth;
     const totalSlides = projects.length;
-    const visibleSlides = 7; // Number of slides to display at a time
+    const visibleSlides = 7;
     let currentIndex = 0;
 
     function startRotatingGallery() {
@@ -274,7 +150,7 @@ $conn->close();
 
         const rotateInterval = setInterval(rotateGallery, 3500);
 
-        // Add event listeners for previous and next buttons
+        // Event listeners for previous and next buttons:
         document.getElementById('prev-button').addEventListener('click', () => {
             clearInterval(rotateInterval);
             currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;

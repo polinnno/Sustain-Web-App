@@ -35,8 +35,6 @@ div{
     align-content: center;
 }
 
-
-
 textarea{
     width: 100%;
     min-height: 300px;
@@ -51,12 +49,12 @@ form{
 }
 
 button {
-    background-color: #5a768a; /* Button background color */
-    color: #ffffff; /* Button text color */
+    background-color: #5a768a;
+    color: #ffffff;
     border: black;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-family: 'Font2', Arial, sans-serif;
     font-weight: bold;
     padding: 15px 70px;
     margin-top: 10px;

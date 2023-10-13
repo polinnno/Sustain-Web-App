@@ -5,34 +5,34 @@ body{
 .gallery-container {
     position: relative;
     overflow: hidden;
-    margin: 0 auto; /* Center the gallery */
+    margin: 0 auto;
     height: 300px;
 }
 
 .gallery-slides {
     display: flex;
-    animation: scroll 60s linear infinite; /* Apply the scrolling animation */
+    animation: scroll 60s linear infinite;
     height: 1000px;
 }
 
 @keyframes scroll {
     from {
-        transform: translateX(0); /* Start from the left */
+        transform: translateX(0);
     }
     to {
-        transform: translateX(-200%); /* Scroll to the left */
+        transform: translateX(-200%);
     }
 }
 
 .gallery-slide {
     position: relative;
-    width: auto; /* Ensure each slide takes up full width */
+    width: auto;
     height: 400px;
 }
 
 .gallery-slide img {
-    width: auto; /* Let the image adjust its width naturally */
-    height: 100%; /* Ensure images take up full height of slide */
+    width: auto;
+    height: 100%;
 }
 
 .gallery-slide img.main-slide {
@@ -58,7 +58,7 @@ body{
     padding-top: 10%;
     padding-bottom: 10%;
     margin: 0;
-    background-size: cover; /* This will scale the image to cover the entire container */
+    background-size: cover;
     border: black 7px;
 }
 
@@ -76,13 +76,11 @@ body{
     margin-inline: 15%;
 }
 
-/* CSS for the rotating gallery */
 .projects-rotating-gallery {
     position: relative;
     width: 100%;
     overflow: hidden;
     background-color: #a9bbc4;
-
 }
 
 .gallery-slides-2 {
@@ -91,7 +89,7 @@ body{
 }
 
 .project-2 {
-    flex: 0 0 14%; /* Show seven projects at a time */
+    flex: 0 0 14%;
     text-align: center;
     padding: 10px;
     border-radius: 10px;
@@ -139,8 +137,8 @@ body{
 
 .separator{
     background-image:
-            linear-gradient(to right, transparent 100px, transparent 300px), /* Add 10px of space before repeating the image */
-            url("media/bg/leaf.png"); /* Your image */
+            linear-gradient(to right, transparent 100px, transparent 300px),
+            url("media/bg/leaf.png");
     width: 100%;
     height: 33px;
     background-size: 1.5%;

@@ -60,7 +60,7 @@ body{
 }
 
 .join-button:hover {
-    background-color: rgba(160, 216, 227, 0.73); /* Change the background color on hover */
+    background-color: rgba(160, 216, 227, 0.73);
 }
 
 .join-form {
@@ -126,4 +126,8 @@ a.edit-btn{
 
     margin-top: 20px;
     bottom: 0;
+}
+
+a.edit-btn:hover{
+    background-color: #90a585;
 }

@@ -1,15 +1,12 @@
 .login-container {
-    margin: 0 auto;
-    margin-top: 3%;
-    width: 35%; /* Adjust width as needed */
-
-    border-radius: 0px; /* Adjust border radius for sharp corners */
-    border: 2px solid black; /* Add a black border */
-
+    width: 35%;
+    border-radius: 0px;
+    border: 2px solid black;
     background-color: white;
     padding: 10px;
     text-align: center;
     align-content: center;
+    margin: 3% auto 100px;
 }
 
 .login-container h1 {
@@ -26,11 +23,10 @@
 
     width: 100%;
     padding: 10px;
-    border: none; /* Remove the default border */
-    border-bottom: 1px solid #ccc; /* Add a bottom border */
+    border: none;
+    border-bottom: 1px solid #ccc;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-
     background-color: white;
     outline: none;
     transition: background-color 0.3s;
@@ -43,12 +39,10 @@
     position: relative;
     margin-bottom: 20px;
     margin-outside: 50px;
-
-
 }
 
 .login-container form {
-    margin-top: 9px; /* Add spacing at the top */
+    margin-top: 9px;
     margin-bottom: 40px;
 }
 
@@ -72,7 +66,6 @@ label {
     color: #595959;
     font-family: 'Font2', Arial, sans-serif;
     text-align: left;
-
 }
 
 input:focus,
@@ -93,19 +86,17 @@ div{
 }
 
 .login-container button {
-    background-color: #5a768a; /* Button background color */
-    color: #ffffff; /* Button text color */
+    background-color: #5a768a;
+    color: #ffffff;
     border: black;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-family: 'Font2', Arial, sans-serif;
     font-weight: bold;
     padding: 15px 70px;
     margin-top: 30px;
     font-size: 20px;
     border-radius: 3vw;
-
-
 }
 
 .login-container button:hover {

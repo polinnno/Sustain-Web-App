@@ -1,6 +1,7 @@
 .info {
     margin: 3% auto 10%;
     width: 65%;
+
     height: fit-content;
     border-radius: 0;
     border: 2px solid black;
@@ -21,7 +22,7 @@
 .info p{
     padding-left: 130px;
     font-family: Perpetua, Arial, sans-serif;
-    font-size: 18px;
+    font-size: 23px;
 }
 
 div{
@@ -43,29 +44,6 @@ h3{
     text-decoration: none;
 }
 
-.date-info{
-    display: inline-block;
-    color: black;
-    text-decoration: none;
-    width: 50%;
-}
-
-.edit-button {
-    background-color: rgba(90, 118, 138, 0.74);
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 3vw;
-    padding: 10px 60px 10px;
-    font-family: 'Font2', Arial, sans-serif;
-    text-decoration: none;
-    font-size: 20px;
-    margin-left: 1%;
-}
-
-.edit-button:hover {
-    background-color: #89d6b6;
-}
 
 .details{
     text-decoration: none;
@@ -74,6 +52,12 @@ h3{
 details button{
     display: inline-block;
 }
+
+.user{
+    display: inline-block;
+    width: 40%;
+    margin-left: 130px;
+ }
 .delete-button {
     background-color: rgb(0, 0, 0);
     color: #ffffff;
@@ -85,7 +69,7 @@ details button{
     text-decoration: none;
     font-size: 20px;
     border: none;
-    margin: 0 50px 0;
+    margin: 0;
 }
 
 .delete-button:hover {
@@ -93,12 +77,10 @@ details button{
 }
 
 .button-container {
-    width: 50%;
+    width: fit-content;
     display: inline-flex;
     align-content: start;
-    margin-top: 3%;
+    margin-top: 2%;
     vertical-align: top;
 }
-#participantsBtn{
-    padding-inline: 30px;
-}
+

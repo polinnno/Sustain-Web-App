@@ -1,7 +1,12 @@
 <?php
-error_reporting(E_ALL);
 ini_set('display_errors', '1');
 session_start();
+$conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+include('header.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
@@ -10,10 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $role = $_POST['role'];
 
-    // Validate input
-
     $errors = [];
-
     if (strlen($password) < 6) {
         $errors[] = 'Password must be at least 6 characters long.';
     }
@@ -22,19 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Name and last name must contain only letters and spaces.';
     }
 
-
-
-    // If there are errors, display them to the user
+    // If there are errors, display them:
     if (!empty($errors)) {
         foreach ($errors as $error) {
             echo $error . '<br>';
         }
     } else {
-        $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
         function generateUniqueUserID($length = 6) {
             $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             $randomString = '';
@@ -42,10 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             for ($i = 0; $i < $length; $i++) {
                 $randomString .= $characters[rand(0, strlen($characters) - 1)];
             }
-
             return $randomString;
         }
-
 
         $emailQuery = "SELECT id FROM Users WHERE email = ?";
         $stmt = $conn->prepare($emailQuery);
@@ -54,37 +47,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Email already exists, display an error message to the user
             $emailAlreadyExists = true;
-
             include 'register-overlay.php';
-            error_log("Overlay is displayed");
-
             echo '<script>document.getElementById("overlay").style.display = "block";</script>';
 
             $stmt->close();
             $conn->close();
-            //exit(); // Stop further processing
         }
         else {
             $stmt->close();
         }
 
-
-
-
-// Generate a new unique user ID
         $newUserID = generateUniqueUserID();
-
-// Check if the generated ID is already used by an existing user
         $isUnique = false;
         $maxAttempts = 10;
 
         while (!$isUnique && $maxAttempts > 0) {
-            // Query the database to check if the generated ID already exists
+            // Query to check if the generated ID already exists
             $query = "SELECT id FROM Users WHERE id = '$newUserID'";
-
-            // Run the query (you'll need to replace this with your database connection code)
             $result = mysqli_query($conn, $query);
 
             if (!$result) {
@@ -92,12 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if (mysqli_num_rows($result) > 0) {
-                // Generated ID already exists, generate a new one
                 $newUserID = generateUniqueUserID();
             } else {
                 $isUnique = true;
             }
-            mysqli_free_result($result); // Free the result set
+            mysqli_free_result($result);
             $maxAttempts--;
         }
 
@@ -105,159 +84,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die('Unable to generate a unique ID.');
         }
 
-
-// Show overlay in case there is an error.
-
         if (isset($errorMessage)) {
-            include 'register-overlay.php'; // Include the overlay content
+            include 'register-overlay.php';
         }
 
-
-        // The directory where uploaded images will be stored
         $uploadDir = 'user-media' . DIRECTORY_SEPARATOR;
 
-// Check if an image file was uploaded
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $tempFilePath = $_FILES['image']['tmp_name'];
             $fileName = $_FILES['image']['name'];
 
-            // Move the uploaded file to the specified directory
+            error_log("pp recognized");
+
             $targetFilePath = $uploadDir . $fileName;
 
             if (move_uploaded_file($tempFilePath, $targetFilePath)) {
-                // File was successfully uploaded, you can save $targetFilePath in the database
             } else {
                 echo 'Error uploading file.';
             }
         } elseif (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
-            // Use the default image when no file was uploaded
-            $targetFilePath = 'media' . DIRECTORY_SEPARATOR . 'user-pp.jpg';
+            $targetFilePath = null;
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hash the password
 
         $stmt = $conn->prepare("INSERT INTO Users (id, name, last_name, email, password, role, image) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $newUserID, $name, $last_name, $email, $hashedPassword, $role, $targetFilePath);
+        $stmt->bind_param("sssssss", $newUserID, $name, $last_name, $email, $hashedPassword, $role, $fileName);
 
 
+        error_log("targetFilePath:");
+        error_log($targetFilePath);
         if ($stmt->execute()) {
-            // Successful registration, redirect to success page or show confirmation message
             $_SESSION['user_id'] = $newUserID;
             header("Location: account.php");
             exit();
         } else {
-            // Failed to insert data, handle the error
             echo "Error: " . $stmt->error;
         }
         $stmt->close();
         $conn->close();
     }
 }
-
-
-/*
- * Subscription submission
- */
-if (isset($_POST['subscribe'])) {
-    // Get the email from the form
-    $email = $_POST['email'];
-
-    $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Validate the email (you can add more robust validation)
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Prepare and execute the SQL query to insert the email into the database
-        $query = "INSERT INTO subscribers (email) VALUES (?)";
-        $stmt = $conn->prepare($query);
-
-        if ($stmt) {
-            $stmt->bind_param("s", $email);
-            if ($stmt->execute()) {
-                echo "Thank you for subscribing!";
-            } else {
-                echo "Error adding email: " . $stmt->error;
-            }
-            $stmt->close();
-        } else {
-            echo "Error preparing statement: " . $conn->error;
-        }
-    } else {
-        echo "Invalid email address.";
-    }
-    $stmt->close();
-    $conn->close();
-}
-
 ?>
 
-<!DOCTYPE html>
 <html lang="">
 <head>
-
-    <!-- Favicon -->
-    <link rel="icon" href="media/circle.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="media/circle.ico" type="image/x-icon">
     <title>Sustain - Register</title>
-    <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="register.css">
-
 </head>
 <body>
-<header>
-    <h1>Sustain</h1>
-</header>
-<nav>
-    <div class="menu-button">
-        <img src="media/menu-ico.jpg" alt="Menu" id="menu-icon" class="menu-btn">
-        <div class="menu-content" id="menu-content">
-            <!-- Add your menu options here -->
-
-
-            <a href="home.php">Home</a>
-            <a href="projects.php">Projects</a>
-            <a href="contact.php">Contact Form</a>
-            <?php
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
-            if (isset($_SESSION['user_id'])) {
-                echo '<a href="account.php" class="last-btn">Account</a>';
-            } else {
-                echo '<a href="login.php" class="last-btn">Log in</a>';
-            }
-            ?>
-            <!-- TODO: dropdown menu login change-->
-        </div>
-    </div>
-
-</nav>
-<div class="vertical-menu" id="vertical-menu">
-    <!-- Add your vertical menu options here -->
-    <a href="add-project.php">Add Project</a>
-    <a href="project-history.php">Project History</a>
-    <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    if (isset($_SESSION['user_id'])) {
-        echo '<a href="logout.php">Log Out</a>';
-    } else {
-        echo '<a href="login.php" class="last-btn">Log in</a>';
-    }
-    ?>
-</div>
-
-
 <div id="notification" class="notification">
     This email is already in use. Please choose a different email.
 </div>
 <div class="register-container">
 <h2>Register</h2>
 
-<form action="register.php" method="post">
+<form action="register.php" method="post" enctype="multipart/form-data">
     <div class="input-group">
         <label for="name">First Name:</label>
         <input type="text" id="name" name="name" required>
@@ -294,6 +176,7 @@ if (isset($_POST['subscribe'])) {
 
 </div>
 <p></p>
+<?php include('footer.php'); ?>
 </body>
 <script>
     const nameInput = document.getElementById('name');
@@ -311,48 +194,28 @@ if (isset($_POST['subscribe'])) {
         }
     }
 
-    // Get references to the overlay and overlay background
+    /*
+    Overlay
+     */
     const overlay = document.getElementById('overlay');
     const overlayBackground = document.getElementById('overlay-background');
     const overlayCloseButton = document.getElementById('overlay-close');
 
-    // Function to show the overlay and overlay background
     function showOverlay() {
         overlay.style.display = 'block';
         overlayBackground.style.display = 'block';
     }
 
-    // Function to hide the overlay and overlay background
     function hideOverlay() {
         overlay.style.display = 'none';
         overlayBackground.style.display = 'none';
     }
 
-    // Event listener for the OK button
     overlayCloseButton.addEventListener('click', hideOverlay);
 
-    // Show overlay when necessary
+    // Show overlay when needed
     <?php if (isset($emailAlreadyExists)) { ?>
     showOverlay();
     <?php } ?>
-
-
-    /*
-    Vertical Menu
-     */
-    var verticalMenu = document.getElementById("vertical-menu");
-
-    document.getElementById("menu-icon").addEventListener("click", function () {
-        verticalMenu.classList.toggle("open");
-    });
-
-    document.getElementById("menu-icon").addEventListener("click", function () {
-        var verticalMenu = document.getElementById("vertical-menu");
-        if (verticalMenu.style.display === "block") {
-            verticalMenu.style.display = "none";
-        } else {
-            verticalMenu.style.display = "block";
-        }
-    });
 </script>
 </html>

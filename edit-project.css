@@ -1,17 +1,13 @@
 .add-project-container{
 
     margin: 3% auto 10%;
-    width: 65%; /* Adjust width as needed */
-
+    width: 65%;
     height: fit-content;
-    border-radius: 0; /* Adjust border radius for sharp corners */
-    border: 2px solid black; /* Add a black border */
-
+    border-radius: 0;
+    border: 2px solid black;
     background-color: white;
-
     text-align: left;
     align-content: normal;
-
     padding: 10px 10px 70px;
 }
 
@@ -31,9 +27,11 @@ body {
     display: flex;
     margin-bottom: 8%;
 
+    font-family: Perpetua, Font2, sans-serif;
+    font-size: 22px;
     padding: 10px;
-    border: none; /* Remove the default border */
-    border-bottom: 1px solid #ccc; /* Add a bottom border */
+    border: none;
+    border-bottom: 1px solid #ccc;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     width: 40%;
@@ -42,13 +40,14 @@ body {
     outline: none;
     transition: background-color 0.3s;
 }
+
 .add-project-container button {
-    background-color: #5a768a; /* Button background color */
-    color: #ffffff; /* Button text color */
+    background-color: #5a768a;
+    color: #ffffff;
     border: black;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-family: 'Font2', Arial, sans-serif;
     font-weight: bold;
     padding: 15px 70px;
     margin-top: 5vw;
@@ -57,8 +56,6 @@ body {
     width: 24%;
     margin-inline: 38%;
     border-radius: 3vw;
-
-
 }
 
 .add-project-container button:hover {
@@ -80,7 +77,6 @@ input[type="file"] {
 
 }
 
-/* Style the "Choose File" button */
 input[type="file"]::file-selector-button {
     padding: 10px;
     background-color: #5a768a;
@@ -91,7 +87,6 @@ input[type="file"]::file-selector-button {
     border-radius: 3vw;
 }
 
-/* Style the arrow icon (if applicable) */
 input[type="file"]::-webkit-file-upload-button {
     background-color: #5a768a;
     color: #fff;

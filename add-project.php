@@ -1,53 +1,16 @@
 <?php
 session_start();
-error_reporting(E_ALL);
 ini_set('display_errors', 1);
 error_log($_SESSION['user_id']);
+$conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
 
+if ($conn->connect_error) {
+    error_log('connection failed');
+    die("Connection failed: " . $conn->connect_error);
+}
+include('header.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    error_log('first if');
-
-    error_log('we good?');
-    $conn = new mysqli("localhost", "root", "root", "it210_sustain", 3306);
-
-    if ($conn->connect_error) {
-        error_log('connection failed');
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-
-    /*
-     * Subscription submission
-     */
-    if (isset($_POST['subscribe'])) {
-        // Get the email from the form
-        $email = $_POST['email'];
-
-        // Validate the email (you can add more robust validation)
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            // Prepare and execute the SQL query to insert the email into the database
-            $query = "INSERT INTO subscribers (email) VALUES (?)";
-            $stmt = $conn->prepare($query);
-
-            if ($stmt) {
-                $stmt->bind_param("s", $email);
-                if ($stmt->execute()) {
-                    echo "Thank you for subscribing!";
-                } else {
-                    echo "Error adding email: " . $stmt->error;
-                }
-                $stmt->close();
-            } else {
-                echo "Error preparing statement: " . $conn->error;
-            }
-        } else {
-            echo "Invalid email address.";
-        }
-    }
-
-
-    // Generate a unique Project ID
     function generateUniqueProjectID($length = 4) {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $randomString = '';
@@ -60,16 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $newProjectID = generateUniqueProjectID();
 
-    error_log('unique project id generated');
-// Check if the generated ID is already used by an existing user
     $isUnique = false;
     $maxAttempts = 10;
 
     while (!$isUnique && $maxAttempts > 0) {
-        // Query the database to check if the generated ID already exists
         $query = "SELECT id FROM project WHERE id = '$newProjectID'";
 
-        // Run the query
         $result = mysqli_query($conn, $query);
 
         if (!$result) {
@@ -78,20 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         if (mysqli_num_rows($result) > 0) {
-            // Generated ID already exists, generate a new one
             $newProjectID = generateUniqueProjectID();
         } else {
             $isUnique = true;
         }
-        mysqli_free_result($result); // Free the result set
+        mysqli_free_result($result);
         $maxAttempts--;
     }
 
     if (!$isUnique) {
         die('Unable to generate a unique ID.');
     }
-
-    error_log('unique id set');
 
     $uploadDir = 'user-media' . DIRECTORY_SEPARATOR;
     if (substr($uploadDir, -1) !== DIRECTORY_SEPARATOR) {
@@ -102,31 +58,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $tempFilePath = $_FILES['image']['tmp_name'];
         $fileName = $_FILES['image']['name'];
 
-        // Move the uploaded file to the specified directory
         $targetFilePath = 'project-media' . DIRECTORY_SEPARATOR . $fileName;
         error_log($targetFilePath);
 
         if (move_uploaded_file($tempFilePath, $targetFilePath)) {
-
-            // File was successfully uploaded, you can save $targetFilePath in the database
         } else {
             echo 'Error uploading file.';
         }
     } elseif (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
-        // Use the default image when no file was uploaded
         $fileName = 'project-default.jpg';
     }
-
-    // Check tags:
     if (isset($_POST['tags']) && is_array($_POST['tags'])) {
         $selectedTags = $_POST['tags'];
     } else {
-        $selectedTags = []; // Default to an empty array if no tags are selected
+        $selectedTags = [];
     }
 
-
-
-// Retrieve form data
     $title = $_POST['title'];
     $description = $_POST['description'];
     $start_date = $_POST['start_date'];
@@ -134,19 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $place = $_POST['place'];
     $organizer_id = $_SESSION['user_id'];
 
-    error_log($organizer_id);
-
-
-// Insert data into the database
     $sql = "INSERT INTO project (id, title, description, start_date, end_date, place, organizer_id, image)
         VALUES ('$newProjectID', '$title', '$description', '$start_date', '$end_date', '$place', '$organizer_id', '$fileName')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Project added successfully!";
         error_log('project added');
-    } else {
-        error_log('project failed');
-        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
 if (!empty($selectedTags)) {
@@ -156,80 +95,21 @@ if (!empty($selectedTags)) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Insert each selected tag into the skills table
     foreach ($selectedTags as $tag) {
         $sql = "INSERT INTO skills (project_id, skill_name) VALUES ('$newProjectID', '$tag')";
-
-        if ($conn->query($sql) === TRUE) {
-            // Tag inserted successfully
-        } else {
-            echo "Error inserting tag: " . $conn->error;
-        }
+        $conn->query($sql);
     }
 }
 
     $conn->close();
 }
 ?>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustain - Projects</title>
-    <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="add-project.css">
-    <!-- Favicon -->
-    <link rel="icon" href="media/circle.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="media/circle.ico" type="image/x-icon">
 </head>
 <body>
-<header>
-    <h1>Sustain</h1>
-</header>
-<nav>
-    <div class="menu-button">
-        <img src="media/menu-ico.jpg" alt="Menu" id="menu-icon" class="menu-btn">
-        <div class="menu-content" id="menu-content">
-            <!-- Add your menu options here -->
-
-
-            <a href="home.php">Home</a>
-            <a href="projects.php">Projects</a>
-            <a href="contact.php">Contact Form</a>
-            <?php
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
-            if (isset($_SESSION['user_id'])) {
-                echo '<a href="account.php" class="last-btn">Account</a>';
-            } else {
-                echo '<a href="login.php" class="last-btn">Log in</a>';
-            }
-            ?>
-            <!-- TODO: dropdown menu login change-->
-        </div>
-    </div>
-
-</nav>
-<div class="vertical-menu" id="vertical-menu">
-    <!-- Add your vertical menu options here -->
-    <a href="add-project.php">Add Project</a>
-    <a href="project-history.php">Project History</a>
-    <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    if (isset($_SESSION['user_id'])) {
-        echo '<a href="logout.php">Log Out</a>';
-    } else {
-        echo '<a href="login.php" class="last-btn">Log in</a>';
-    }
-    ?>
-</div>
-
-
 <div class="add-project-container">
 
     <h2>New Project</h2>
@@ -274,7 +154,6 @@ if (!empty($selectedTags)) {
             <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png">
         </div>
 
-        <!-- Inside your HTML form -->
         <div class="input-group">
             <br>
             <br>
@@ -294,47 +173,9 @@ if (!empty($selectedTags)) {
                 <label for="tag11"><input type="checkbox" id="tag11" name="tags[]" value="Other"> Other</label><br>
             </div>
         </div>
-
-
         <button type="submit">Add Project</button>
     </form>
 </div>
-<div class="footer-content">
-    <div class="footer-links">
-        <a href="home.php">Home</a> <br><br>
-        <a href="projects.php">Projects</a><br><br>
-        <a href="contact.php">Contact</a><br><br>
-        <a href="account.php">About</a><br><br>
-    </div>
-    <div class="footer-info">
-        <h3>Contact Us</h3>
-        <p>1234 Elm Street<br>Cityville, ST 56789</p>
-        <p>Phone: (123) 456-7890<br>Email: info@example.com</p>
-    </div>
-    <form id="subscription-form" method="POST">
-        <input type="email" name="email" id="email" placeholder="Enter your email" required>
-        <button type="submit" name="subscribe">Subscribe</button>
-    </form>
-</div>
-<script>
-    /*
-    Vertical Menu
-     */
-    var verticalMenu = document.getElementById("vertical-menu");
-
-    document.getElementById("menu-icon").addEventListener("click", function () {
-        verticalMenu.classList.toggle("open");
-    });
-
-    document.getElementById("menu-icon").addEventListener("click", function () {
-        var verticalMenu = document.getElementById("vertical-menu");
-        if (verticalMenu.style.display === "block") {
-            verticalMenu.style.display = "none";
-        } else {
-            verticalMenu.style.display = "block";
-        }
-    });
-
-</script>
+<?php include('footer.php'); ?>
 </body>
 </html>

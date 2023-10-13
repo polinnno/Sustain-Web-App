@@ -1,11 +1,9 @@
 .register-container {
     margin: 0 auto;
     margin-top: 3%;
-    width: 35%; /* Adjust width as needed */
-
-    border-radius: 0px; /* Adjust border radius for sharp corners */
-    border: 2px solid black; /* Add a black border */
-
+    width: 35%;
+    border-radius: 0px;
+    border: 2px solid black;
     background-color: white;
     padding: 20px;
     text-align: center;
@@ -26,11 +24,10 @@
 
     width: 100%;
     padding: 10px;
-    border: none; /* Remove the default border */
-    border-bottom: 1px solid #ccc; /* Add a bottom border */
+    border: none;
+    border-bottom: 1px solid #ccc;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-
     background-color: white;
     outline: none;
     transition: background-color 0.3s;
@@ -46,7 +43,7 @@
 }
 
 .register-container form {
-    margin-top: 20px; /* Add spacing at the top */
+    margin-top: 20px;
     margin-bottom: 40px;
 }
 
@@ -86,12 +83,12 @@ input:valid + label {
 
 
 .register-container button {
-    background-color: #5a768a; /* Button background color */
-    color: #ffffff; /* Button text color */
+    background-color: #5a768a;
+    color: #ffffff;
     border: black;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-family: 'Font2', Arial, sans-serif;
     font-weight: bold;
     padding: 15px 70px;
     margin-top: 30px;
@@ -115,9 +112,7 @@ select {
     margin-bottom: 20px;
 }
 
-/* Style the arrow icon */
 
-/* Add a custom arrow icon using a background image */
 select {
     background-repeat: no-repeat;
     background-position: right center;
@@ -127,7 +122,6 @@ select {
 
 }
 
-/* Apply styles to the "Choose File" input element */
 input[type="file"] {
     padding: 10px;
     border: 1px solid #ccc;
@@ -143,7 +137,6 @@ input[type="file"] {
 
 }
 
-/* Style the "Choose File" button */
 input[type="file"]::file-selector-button {
     padding: 10px;
     background-color: #5a768a;
@@ -153,7 +146,6 @@ input[type="file"]::file-selector-button {
     font-family: 'Font2', Arial, sans-serif;
 }
 
-/* Style the arrow icon (if applicable) */
 input[type="file"]::-webkit-file-upload-button {
     background-color: #5a768a;
     color: #fff;

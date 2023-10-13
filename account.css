@@ -1,19 +1,14 @@
 
 .info {
     margin: 3% auto 10%;
-    width: 65%; /* Adjust width as needed */
-
+    width: 65%;
     height: fit-content;
-    border-radius: 0; /* Adjust border radius for sharp corners */
-    border: 2px solid black; /* Add a black border */
-
+    border-radius: 0;
+    border: 2px solid black;
     background-color: white;
-
     text-align: left;
     align-content: normal;
-
     padding: 10px 10px 0;
-
 }
 
 .info h1 {
@@ -51,12 +46,12 @@ div{
 }
 
 .info a{
-    background-color: #5a768a; /* Button background color */
-    color: #ffffff; /* Button text color */
+    background-color: #5a768a;
+    color: #ffffff;
     border: black;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-family: 'Font2', Arial, sans-serif;
     font-weight: bold;
     margin-top: 10%;
     margin-left: 130px;
@@ -68,27 +63,22 @@ div{
 }
 
 .logout-btn a{
-    background-color: #000000; /* Button background color */
-
-    color: #ffffff; /* Button text color */
+    background-color: #000000;
+    color: #ffffff;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-family: 'Font2', Arial, sans-serif; /* Button font */
+    font-family: 'Font2', Arial, sans-serif;
     font-weight: bold;
     height: fit-content;
-
     width: fit-content;
-
     border-radius: 3vw;
     display: inline-block;
-
     font-size: 20px;
     padding-inline: 70px;
     text-decoration: none;
     margin-bottom: 10%;
     margin-top: 10%;
 }
-
 
 .info a:hover {
     background-color: #89d6b6;
@@ -115,6 +105,7 @@ div{
     border: 2px solid black;
     margin-left: 20%;
 }
+
 .pp img{
     height:300px;
     width: 300px;

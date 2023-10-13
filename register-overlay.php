@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-
     <!-- Favicon -->
     <link rel="icon" href="media/circle.ico" type="image/x-icon">
     <link rel="shortcut icon" href="media/circle.ico" type="image/x-icon">
     <title>Sustain - Register</title>
     <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="register-overlay.css">
-
 </head>
 <body>
 <div id="overlay-background" class="overlay-background"></div>
@@ -25,7 +23,6 @@
 
     // Event listener for the OK button
     overlayCloseButton.addEventListener('click', () => {
-        // Navigate back to the previous page
         history.back();
     });
 </script>
